@@ -669,6 +669,41 @@ footer a{color:var(--gold2);}
 .footer-links a:hover{color:var(--gold2);}
 
 /* ═══════════════════════════════════════
+   LOGIN MODAL
+═══════════════════════════════════════ */
+.login-modal{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.95);
+  width:90%;max-width:800px;background:var(--white);z-index:1002;
+  border-radius:24px;overflow:hidden;box-shadow:var(--sh3);
+  display:flex;opacity:0;pointer-events:none;transition:.3s var(--ease);
+}
+.login-modal.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1);}
+.login-img{
+  flex:1;background:url('images/hero_background.png') center/cover no-repeat;
+  position:relative;display:none;
+}
+@media(min-width:768px){.login-img{display:block;}}
+.login-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(26,82,22,.6),rgba(26,82,22,.2));
+}
+.login-content{
+  flex:1;padding:48px 32px;display:flex;flex-direction:column;justify-content:center;
+  position:relative;
+}
+.login-close{
+  position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:12px;
+  background:var(--g5);color:var(--g1);font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.login-close:hover{background:var(--g4);}
+.login-title{
+  font-family:'Cormorant Garant',serif;font-size:2.2rem;color:var(--brown);
+  margin-bottom:8px;
+}
+.login-sub{color:var(--muted);font-size:.95rem;margin-bottom:32px;line-height:1.5;}
+
+/* ═══════════════════════════════════════
    OVERLAY + DRAWERS
 ═══════════════════════════════════════ */
 .ov{
@@ -1238,27 +1273,49 @@ footer a{color:var(--gold2);}
 </footer>
 
 <!-- ═══════════════════════════════════════
+     LOGIN MODAL
+═══════════════════════════════════════ -->
+<div class="ov" id="loginOv" onclick="closeLogin()"></div>
+<div class="login-modal" id="loginModal" role="dialog" aria-modal="true">
+  <div class="login-img"></div>
+  <div class="login-content">
+    <button class="login-close" onclick="closeLogin()" aria-label="Close login">✕</button>
+    <h2 class="login-title">Welcome to Palm Cafe</h2>
+    <p class="login-sub">Please enter your details to continue to your order.</p>
+    
+    <div class="cf-label">Full Name</div>
+    <input class="fi" id="loginName" type="text" placeholder="e.g. John Doe" style="margin-bottom:16px;" autocomplete="name">
+    
+    <div class="cf-label">Phone Number</div>
+    <input class="fi" id="loginPhone" type="tel" placeholder="10-digit mobile number" style="margin-bottom:32px;" autocomplete="tel">
+    
+    <button class="btn-primary" style="padding:16px;" onclick="processLogin()">Continue to Order →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
      PROFILE DRAWER
 ═══════════════════════════════════════ -->
 <div class="ov" id="profileOv" onclick="closeProfile()"></div>
 <div class="drawer" id="profileDr" role="dialog" aria-label="Customer Profile" aria-modal="true">
-  <div class="dr-head">
-    <h2>👤 My Profile</h2>
-    <button class="dr-close" onclick="closeProfile()" aria-label="Close profile">✕</button>
+  <div class="dr-head" style="background:var(--g5); border-bottom:none; flex-direction:column; align-items:center; padding:32px 20px 20px;">
+    <button class="dr-close" onclick="closeProfile()" aria-label="Close profile" style="position:absolute; top:16px; right:16px; background:rgba(0,0,0,0.05);">✕</button>
+    <div style="width:80px;height:80px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:12px;box-shadow:var(--sh2);">👤</div>
+    <h2 style="font-size:1.6rem; color:var(--g1); margin:0;" id="profHeadName">My Profile</h2>
+    <p style="color:var(--muted); font-size:0.9rem; margin-top:4px;" id="profHeadPhone"></p>
   </div>
-  <div class="dr-foot" style="flex:1; border-top:none; padding-top:0;">
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:20px;">Save your details below for faster checkout.</p>
-    
+  <div class="dr-body" style="flex:1; padding-top:20px;">
     <div class="cf-label">👤 Your Details</div>
     <input class="fi" id="profName"  type="text" placeholder="Full name" autocomplete="name">
     <input class="fi" id="profPhone" type="tel"  placeholder="Phone number (10 digits)" autocomplete="tel">
 
-    <div class="cf-label" style="margin-top:15px;">🏠 Default Address</div>
+    <div class="cf-label" style="margin-top:20px;">🏠 Default Address</div>
     <input class="fi" id="profStreet" type="text" placeholder="Street / House No.">
     <input class="fi" id="profArea"   type="text" placeholder="Area / Landmark">
     <input class="fi" id="profPin"    type="text" placeholder="Pincode" maxlength="6">
 
-    <button class="btn-primary" style="margin-top:20px;" onclick="saveProfile()">Save Profile</button>
+    <button class="btn-primary" style="margin-top:24px;" onclick="saveProfile()">Save Profile</button>
+    <button onclick="logoutProfile()" style="margin-top:12px; width:100%; padding:14px; border:1px solid #ff4d4d; border-radius:12px; background:transparent; color:#ff4d4d; font-weight:600; cursor:pointer;">Log Out</button>
   </div>
 </div>
 
@@ -1860,15 +1917,43 @@ document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>ro.observe(el));
 
 /* ── ESC KEY ── */
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeCart();closeWL();closeAdmin();closeMob();closeProfile();}
+  if(e.key==='Escape'){closeCart();closeWL();closeAdmin();closeMob();closeProfile();closeLogin();}
 });
+
+/* ── LOGIN ── */
+function openLogin(){
+  closeWL(); closeCart(); closeMob(); closeProfile();
+  document.getElementById('loginOv').classList.add('open');
+  document.getElementById('loginModal').classList.add('open');
+  setTimeout(()=>document.getElementById('loginName').focus(),300);
+}
+function closeLogin(){
+  document.getElementById('loginOv').classList.remove('open');
+  document.getElementById('loginModal').classList.remove('open');
+}
+function processLogin(){
+  const n = document.getElementById('loginName').value.trim();
+  const p = document.getElementById('loginPhone').value.trim();
+  if(!n || !p){ toast('⚠️ Please enter your name and phone number'); return; }
+  store.cxProfile = { ...store.cxProfile, name: n, phone: p };
+  persist();
+  toast('✅ Logged in successfully!');
+  closeLogin();
+  openCart();
+}
 
 /* ── PROFILE ── */
 function openProfile(){
-  closeWL(); closeCart(); closeMob();
+  if(!store.cxProfile || !store.cxProfile.name){
+    openLogin();
+    return;
+  }
+  closeWL(); closeCart(); closeMob(); closeLogin();
   document.getElementById('profileOv').classList.add('open');
   document.getElementById('profileDr').classList.add('open');
   const cx = store.cxProfile || {};
+  document.getElementById('profHeadName').textContent = cx.name || 'My Profile';
+  document.getElementById('profHeadPhone').textContent = cx.phone ? '+91 '+cx.phone : '';
   if(cx.name) document.getElementById('profName').value = cx.name;
   if(cx.phone) document.getElementById('profPhone').value = cx.phone;
   if(cx.street) document.getElementById('profStreet').value = cx.street;
@@ -1890,6 +1975,14 @@ function saveProfile(){
   persist();
   toast('✅ Profile saved securely!');
   closeProfile();
+}
+function logoutProfile(){
+  if(confirm("Are you sure you want to log out?")){
+    delete store.cxProfile;
+    persist();
+    closeProfile();
+    toast('✅ Logged out successfully');
+  }
 }
 function loadProfileToCart(){
   const cx = store.cxProfile;

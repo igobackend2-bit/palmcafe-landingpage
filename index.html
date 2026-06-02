@@ -967,6 +967,9 @@ footer a{color:var(--gold2);}
     </ul>
 
     <div class="nav-actions">
+      <button class="nav-icon" onclick="openProfile()" title="Profile" aria-label="Profile">
+        👤
+      </button>
       <button class="nav-icon" onclick="openWL()" title="Wishlist" aria-label="Wishlist">
         ❤️<span class="nbadge" id="wlBadge"></span>
       </button>
@@ -1233,6 +1236,31 @@ footer a{color:var(--gold2);}
   <p>📞 <a href="tel:+918925962259">+91 89259 62259</a> &nbsp;|&nbsp; <a href="tel:+918925893320">+91 89258 93320</a></p>
   <p style="margin-top:10px;font-size:.72rem;">© 2024 Palm Cafe. All rights reserved. Made with ❤️ for health lovers.</p>
 </footer>
+
+<!-- ═══════════════════════════════════════
+     PROFILE DRAWER
+═══════════════════════════════════════ -->
+<div class="ov" id="profileOv" onclick="closeProfile()"></div>
+<div class="drawer" id="profileDr" role="dialog" aria-label="Customer Profile" aria-modal="true">
+  <div class="dr-head">
+    <h2>👤 My Profile</h2>
+    <button class="dr-close" onclick="closeProfile()" aria-label="Close profile">✕</button>
+  </div>
+  <div class="dr-foot" style="flex:1; border-top:none; padding-top:0;">
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:20px;">Save your details below for faster checkout.</p>
+    
+    <div class="cf-label">👤 Your Details</div>
+    <input class="fi" id="profName"  type="text" placeholder="Full name" autocomplete="name">
+    <input class="fi" id="profPhone" type="tel"  placeholder="Phone number (10 digits)" autocomplete="tel">
+
+    <div class="cf-label" style="margin-top:15px;">🏠 Default Address</div>
+    <input class="fi" id="profStreet" type="text" placeholder="Street / House No.">
+    <input class="fi" id="profArea"   type="text" placeholder="Area / Landmark">
+    <input class="fi" id="profPin"    type="text" placeholder="Pincode" maxlength="6">
+
+    <button class="btn-primary" style="margin-top:20px;" onclick="saveProfile()">Save Profile</button>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════
      CART DRAWER
@@ -1525,7 +1553,8 @@ function renderCart(){
     </div>`).join('');
 }
 function openCart(){
-  closeWL();
+  closeWL(); closeProfile();
+  loadProfileToCart();
   document.getElementById('cartOv').classList.add('open');
   document.getElementById('cartDr').classList.add('open');
   renderCart();
@@ -1831,8 +1860,46 @@ document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>ro.observe(el));
 
 /* ── ESC KEY ── */
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeCart();closeWL();closeAdmin();closeMob();}
+  if(e.key==='Escape'){closeCart();closeWL();closeAdmin();closeMob();closeProfile();}
 });
+
+/* ── PROFILE ── */
+function openProfile(){
+  closeWL(); closeCart(); closeMob();
+  document.getElementById('profileOv').classList.add('open');
+  document.getElementById('profileDr').classList.add('open');
+  const cx = store.cxProfile || {};
+  if(cx.name) document.getElementById('profName').value = cx.name;
+  if(cx.phone) document.getElementById('profPhone').value = cx.phone;
+  if(cx.street) document.getElementById('profStreet').value = cx.street;
+  if(cx.area) document.getElementById('profArea').value = cx.area;
+  if(cx.pin) document.getElementById('profPin').value = cx.pin;
+}
+function closeProfile(){
+  document.getElementById('profileOv').classList.remove('open');
+  document.getElementById('profileDr').classList.remove('open');
+}
+function saveProfile(){
+  store.cxProfile = {
+    name: document.getElementById('profName').value.trim(),
+    phone: document.getElementById('profPhone').value.trim(),
+    street: document.getElementById('profStreet').value.trim(),
+    area: document.getElementById('profArea').value.trim(),
+    pin: document.getElementById('profPin').value.trim()
+  };
+  persist();
+  toast('✅ Profile saved securely!');
+  closeProfile();
+}
+function loadProfileToCart(){
+  const cx = store.cxProfile;
+  if(!cx) return;
+  if(cx.name && !document.getElementById('custName').value) document.getElementById('custName').value = cx.name;
+  if(cx.phone && !document.getElementById('custPhone').value) document.getElementById('custPhone').value = cx.phone;
+  if(cx.street && !document.getElementById('custStreet').value) document.getElementById('custStreet').value = cx.street;
+  if(cx.area && !document.getElementById('custArea').value) document.getElementById('custArea').value = cx.area;
+  if(cx.pin && !document.getElementById('custPin').value) document.getElementById('custPin').value = cx.pin;
+}
 
 /* ── INIT ── */
 renderProducts();

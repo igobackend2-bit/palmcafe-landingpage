@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palm Cafe – The Healthy Food Joint | Uthandi, Chennai</title>
+<meta name="description" content="Palm Cafe – The Healthy Food Joint. Fresh smoothies, juices, milkshakes & healthy food. No 17, Kovalan Street, Uthandi Kanathur, Chennai 600119.">
+<meta name="keywords" content="Palm Cafe, healthy food, smoothies, juices, milkshakes, Chennai, Uthandi, Kanathur, healthy restaurant">
+<meta property="og:title" content="Palm Cafe – The Healthy Food Joint, Chennai">
+<meta property="og:description" content="Fresh smoothies, juices & healthy meals in Uthandi, Chennai. Order via WhatsApp!">
+<meta property="og:image" content="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=1200&q=80">
+
+<!-- ── FONTS: Cormorant Garant (elegant headlines) + Poppins (clean body) + Dancing Script (accent) ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root{
+  --g1:#1a4d1a; --g2:#2d6a4f; --g3:#52b788; --g4:#d8f3dc;
+  --r1:#7b1a1a;
+  --gold:#c9973a; --gold2:#f0c060;
+  --cream:#fdf8f0; --brown:#3d1f14; --brown2:#6b3a2a;
+  --text:#1a1a1a; --muted:#6b7280; --border:#e5e7eb; --white:#fff;
+  --nav-h:72px;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --r:16px; --rl:24px; --rxl:32px;
+  --sh-sm:0 1px 4px rgba(0,0,0,.08);
+  --sh:0 4px 20px rgba(0,0,0,.10);
+  --sh-lg:0 10px 40px rgba(0,0,0,.15);
+  --sh-xl:0 24px 64px rgba(0,0,0,.18);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;line-height:1.6;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:#f0f0f0;}
+::-webkit-scrollbar-thumb{background:var(--g2);border-radius:4px;}
+
+/* ── UTILS ── */
+.container{max-width:1180px;margin:0 auto;padding:0 5%;}
+.sec{padding:96px 0;}
+.sec-sm{padding:64px 0;}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--g4);color:var(--g1);
+  padding:4px 14px;border-radius:20px;
+  font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.tag-dark{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);}
+h1,h2,h3{font-family:'Cormorant Garant',Georgia,serif;}
+.script{font-family:'Dancing Script',cursive;}
+.sec-title{font-size:clamp(2rem,4.5vw,3.2rem);color:var(--brown);line-height:1.15;font-weight:700;}
+.sec-title-light{color:#fff;}
+.sec-sub{color:var(--muted);margin-top:10px;max-width:520px;font-size:.97rem;}
+.sec-center{text-align:center;}
+.sec-center .sec-sub{margin-left:auto;margin-right:auto;}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-30px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal-l.visible{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(30px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal-r.visible{opacity:1;transform:translateX(0);}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(90px);
+  background:var(--brown);color:#fff;padding:12px 26px;border-radius:50px;
+  font-size:.85rem;font-weight:600;z-index:9999;opacity:0;
+  transition:all .35s var(--ease);white-space:nowrap;pointer-events:none;
+  box-shadow:var(--sh-lg);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ════════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  transition:background .35s var(--ease),box-shadow .35s var(--ease),backdrop-filter .35s;
+}
+#nav.scrolled{
+  background:rgba(255,255,255,.97);backdrop-filter:blur(18px);
+  box-shadow:0 2px 24px rgba(0,0,0,.08);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:var(--nav-h);padding:0 5%;max-width:100%;
+}
+.nav-logo img,.nav-logo svg{height:46px;width:auto;}
+.nav-links{display:flex;gap:4px;list-style:none;}
+.nav-links a{
+  padding:8px 14px;border-radius:10px;font-size:.87rem;font-weight:500;
+  color:rgba(255,255,255,.88);transition:all .2s;
+}
+#nav.scrolled .nav-links a{color:var(--text);}
+.nav-links a:hover{background:rgba(255,255,255,.15);color:#fff;}
+#nav.scrolled .nav-links a:hover{background:var(--g4);color:var(--g1);}
+.nav-actions{display:flex;align-items:center;gap:8px;}
+.nav-icon-btn{
+  position:relative;background:rgba(255,255,255,.12);border:none;
+  width:40px;height:40px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;transition:.2s;color:#fff;cursor:pointer;
+}
+#nav.scrolled .nav-icon-btn{background:var(--cream);color:var(--text);}
+.nav-icon-btn:hover{background:rgba(255,255,255,.25)!important;}
+.nbadge{
+  position:absolute;top:3px;right:3px;
+  background:var(--r1);color:#fff;font-size:.58rem;font-weight:700;
+  min-width:16px;height:16px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;padding:0 3px;
+}
+.nbadge:empty{display:none;}
+.nav-cta{
+  background:var(--gold);color:#fff;border:none;
+  padding:10px 20px;border-radius:12px;font-size:.84rem;font-weight:700;
+  display:flex;align-items:center;gap:7px;transition:.25s;cursor:pointer;
+  box-shadow:0 3px 14px rgba(201,151,58,.35);
+}
+.nav-cta:hover{background:#b5832e;transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer;}
+.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s;display:block;}
+#nav.scrolled .hamburger span{background:var(--text);}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile Nav */
+.mob-nav{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;z-index:899;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);
+  padding:24px 5%;flex-direction:column;gap:4px;overflow-y:auto;
+}
+.mob-nav.open{display:flex;}
+.mob-nav a{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;border-radius:12px;font-size:1rem;font-weight:500;
+  color:var(--text);transition:.2s;border:1px solid transparent;
+}
+.mob-nav a:hover{background:var(--g4);color:var(--g1);border-color:var(--g3);}
+
+/* ════════════════════════════════════════════
+   HERO – full-screen with real food image
+════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;position:relative;display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1920&q=85&auto=format&fit=crop') center/cover no-repeat;
+  transform:scale(1.05);transition:transform 8s ease;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,
+    rgba(26,77,26,.88) 0%,
+    rgba(26,77,26,.72) 45%,
+    rgba(26,77,26,.30) 100%);
+}
+.hero-content{
+  position:relative;z-index:1;max-width:680px;padding:120px 5% 80px;
+  margin-left:5%;
+}
+.hero-script{
+  font-family:'Dancing Script',cursive;font-size:1.5rem;
+  color:var(--gold2);display:block;margin-bottom:10px;opacity:.9;
+}
+.hero h1{
+  font-size:clamp(3rem,7vw,5.2rem);color:#fff;line-height:1.08;
+  margin-bottom:12px;text-shadow:0 2px 20px rgba(0,0,0,.3);
+}
+.hero h1 em{color:var(--gold2);font-style:italic;}
+.hero-tagline{
+  font-size:.78rem;letter-spacing:5px;text-transform:uppercase;
+  color:rgba(255,255,255,.55);font-weight:400;margin-bottom:20px;
+}
+.hero p{
+  font-size:1.08rem;color:rgba(255,255,255,.83);
+  line-height:1.8;margin-bottom:40px;max-width:480px;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-gold{
+  background:var(--gold);color:#fff;padding:15px 32px;border-radius:14px;
+  font-weight:700;font-size:.92rem;border:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:.25s var(--ease);box-shadow:0 6px 24px rgba(201,151,58,.4);cursor:pointer;
+}
+.btn-gold:hover{background:#b5832e;transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,151,58,.45);}
+.btn-ghost{
+  background:rgba(255,255,255,.12);color:#fff;padding:15px 32px;border-radius:14px;
+  font-weight:600;font-size:.92rem;border:2px solid rgba(255,255,255,.3);
+  display:inline-flex;align-items:center;gap:8px;transition:.25s var(--ease);cursor:pointer;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.22);transform:translateY(-3px);}
+
+/* Hero scroll indicator */
+.scroll-ind{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:1;
+  color:rgba(255,255,255,.45);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;
+}
+.scroll-ind .scroll-dot{
+  width:6px;height:6px;background:rgba(255,255,255,.5);border-radius:50%;
+  animation:scrollBounce 1.8s ease-in-out infinite;
+}
+@keyframes scrollBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+/* Hero floating badges */
+.hero-badge-wrap{
+  position:absolute;right:5%;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:16px;z-index:2;
+}
+.hbadge{
+  background:rgba(255,255,255,.12);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.2);border-radius:var(--r);
+  padding:14px 18px;color:#fff;display:flex;align-items:center;gap:12px;
+  box-shadow:var(--sh-lg);min-width:190px;
+  animation:floatBadge 4s ease-in-out infinite;
+}
+.hbadge:nth-child(2){animation-delay:1.5s;}
+.hbadge:nth-child(3){animation-delay:3s;}
+@keyframes floatBadge{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.hbadge-icon{font-size:1.8rem;flex-shrink:0;}
+.hbadge strong{display:block;font-size:.88rem;font-weight:700;}
+.hbadge span{font-size:.72rem;opacity:.7;}
+
+/* ════════════════════════════════════════════
+   STATS
+════════════════════════════════════════════ */
+.stats-bar{
+  background:var(--brown);padding:24px 5%;
+  display:flex;justify-content:center;flex-wrap:wrap;
+}
+.stat{
+  flex:1;min-width:130px;text-align:center;
+  padding:16px 16px;border-right:1px solid rgba(255,255,255,.08);
+}
+.stat:last-child{border:none;}
+.stat .n{
+  font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:700;
+  color:var(--gold2);line-height:1;
+}
+.stat .l{font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+
+/* ════════════════════════════════════════════
+   ADDONS BANNER
+════════════════════════════════════════════ */
+.addons-bar{
+  background:linear-gradient(90deg,var(--g1),var(--g2),var(--g1));
+  padding:20px 5%;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+}
+.addon-chip{display:flex;align-items:center;gap:12px;color:#fff;}
+.addon-chip .ic{font-size:1.8rem;}
+.addon-chip h4{font-size:.9rem;font-weight:700;}
+.addon-chip p{font-size:.73rem;opacity:.72;}
+
+/* ════════════════════════════════════════════
+   WHY US – image left, text right
+════════════════════════════════════════════ */
+.whyus-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.whyus-img{
+  border-radius:var(--rxl);overflow:hidden;position:relative;
+  box-shadow:var(--sh-xl);aspect-ratio:4/5;
+}
+.whyus-img img{width:100%;height:100%;object-fit:cover;}
+.whyus-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,77,26,.6) 0%,transparent 50%);
+}
+.whyus-img-badge{
+  position:absolute;bottom:24px;left:24px;right:24px;
+  background:rgba(255,255,255,.12);backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.2);border-radius:var(--r);
+  padding:16px 20px;color:#fff;
+  display:flex;align-items:center;gap:14px;
+}
+.whyus-img-badge .big{font-family:'Cormorant Garant',serif;font-size:2.2rem;font-weight:700;color:var(--gold2);}
+.whyus-text h2{font-size:clamp(1.8rem,3.5vw,2.7rem);color:var(--brown);margin-bottom:16px;}
+.whyus-text > p{color:var(--muted);line-height:1.8;margin-bottom:10px;}
+.values{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.val-card{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--cream);border-radius:var(--r);padding:16px 20px;
+  border:1px solid var(--border);transition:.25s;
+}
+.val-card:hover{border-color:var(--g3);box-shadow:var(--sh-sm);transform:translateX(6px);}
+.val-ic{
+  width:44px;height:44px;border-radius:12px;background:var(--g4);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;
+}
+.val-text h4{font-size:.92rem;font-weight:700;color:var(--brown);margin-bottom:2px;}
+.val-text p{font-size:.78rem;color:var(--muted);}
+
+/* ════════════════════════════════════════════
+   MENU
+════════════════════════════════════════════ */
+#menu{background:var(--cream);}
+.menu-hdr{text-align:center;margin-bottom:52px;}
+.menu-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.tab-btn{
+  display:flex;align-items:center;gap:7px;
+  padding:11px 24px;border-radius:50px;
+  border:2px solid var(--border);background:#fff;
+  font-size:.87rem;font-weight:600;color:var(--muted);
+  transition:.2s;cursor:pointer;
+}
+.tab-btn:hover{border-color:var(--g3);color:var(--g2);}
+.tab-btn.active{background:var(--g1);color:#fff;border-color:var(--g1);box-shadow:0 4px 16px rgba(26,77,26,.25);}
+.menu-panel{display:none;}
+.menu-panel.active{display:block;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:22px;}
+.prod-card{
+  background:#fff;border-radius:var(--rl);overflow:hidden;
+  box-shadow:var(--sh-sm);border:1px solid var(--border);
+  transition:.3s var(--ease);position:relative;
+}
+.prod-card:hover{transform:translateY(-8px);box-shadow:var(--sh-lg);border-color:transparent;}
+.prod-img{
+  height:175px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+/* Category-specific gradients */
+.prod-img.smoothies-bg{background:linear-gradient(135deg,#d8f3dc,#95d5b2);}
+.prod-img.juices-bg{background:linear-gradient(135deg,#fff3cd,#ffb703,#fb8500);}
+.prod-img.milkshakes-bg{background:linear-gradient(135deg,#fce4ec,#f48fb1);}
+.prod-img.food-bg{background:linear-gradient(135deg,#e8f5e9,#a5d6a7);}
+.prod-img .prod-emoji{font-size:4rem;user-select:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15));transition:.3s;}
+.prod-card:hover .prod-emoji{transform:scale(1.12) rotate(-5deg);}
+.prod-badge-wrap{position:absolute;top:12px;left:12px;}
+.prod-badge{
+  background:var(--gold);color:#fff;
+  font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:20px;
+  letter-spacing:1px;text-transform:uppercase;box-shadow:var(--sh-sm);
+}
+.wl-btn{
+  position:absolute;top:10px;right:10px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.92);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:.25s;box-shadow:var(--sh-sm);
+  backdrop-filter:blur(4px);
+}
+.wl-btn:hover{transform:scale(1.2);}
+.wl-btn.active{background:var(--r1);color:#fff;}
+.prod-body{padding:18px;}
+.prod-body h3{font-family:'Cormorant Garant',serif;font-size:1.15rem;font-weight:700;color:var(--brown);margin-bottom:5px;}
+.prod-body p{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{font-size:1.12rem;font-weight:800;color:var(--g1);}
+.add-btn{
+  background:var(--g1);color:#fff;border:none;
+  width:36px;height:36px;border-radius:10px;
+  font-size:1.5rem;font-weight:200;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:.25s;cursor:pointer;
+}
+.add-btn:hover{background:var(--g2);transform:scale(1.12);}
+.qty-ctrl{display:flex;align-items:center;gap:6px;}
+.qty-ctrl button{
+  width:30px;height:30px;border-radius:8px;
+  border:2px solid var(--border);background:#fff;
+  font-size:.9rem;font-weight:700;color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;cursor:pointer;
+}
+.qty-ctrl button:hover{border-color:var(--g1);color:var(--g1);}
+.qty-ctrl .qn{font-size:.9rem;font-weight:700;min-width:20px;text-align:center;}
+
+/* ════════════════════════════════════════════
+   FULL-WIDTH IMAGE DIVIDER
+════════════════════════════════════════════ */
+.img-divider{
+  height:420px;position:relative;overflow:hidden;
+  background:url('https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+}
+.img-divider::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(26,77,26,.80),rgba(61,31,20,.65));
+}
+.img-divider-content{
+  position:relative;z-index:1;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:#fff;padding:0 5%;
+}
+.img-divider-content .script{font-size:1.4rem;color:var(--gold2);margin-bottom:10px;}
+.img-divider-content h2{font-size:clamp(2rem,5vw,3.6rem);color:#fff;margin-bottom:16px;line-height:1.1;}
+.img-divider-content p{font-size:1rem;color:rgba(255,255,255,.78);max-width:520px;margin-bottom:28px;line-height:1.7;}
+
+/* ════════════════════════════════════════════
+   ORDER PLATFORMS
+════════════════════════════════════════════ */
+#order{background:#fff;}
+.order-hdr{text-align:center;margin-bottom:52px;}
+.platforms-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;max-width:920px;margin:0 auto;}
+.plat-card{
+  border-radius:var(--rl);padding:34px 28px;text-align:center;
+  border:2px solid var(--border);background:#fff;
+  transition:.3s var(--ease);position:relative;overflow:hidden;
+}
+.plat-card::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:.3s;
+}
+.plat-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);}
+.plat-card.wa-card{border-color:#25d366;}
+.plat-card.wa-card::before{background:linear-gradient(135deg,#f0fff7,#d8f3dc);}
+.plat-card.wa-card:hover::before{opacity:1;}
+.plat-card.sw-card{border-color:#fc8019;}
+.plat-card.sw-card::before{background:linear-gradient(135deg,#fff8f0,#ffe5cc);}
+.plat-card.sw-card:hover::before{opacity:1;}
+.plat-card.zo-card{border-color:#e23744;}
+.plat-card.zo-card::before{background:linear-gradient(135deg,#fff5f6,#ffd6d9);}
+.plat-card.zo-card:hover::before{opacity:1;}
+.plat-inner{position:relative;z-index:1;}
+.plat-icon-wrap{font-size:3.2rem;margin-bottom:14px;display:block;}
+.plat-card h3{font-family:'Cormorant Garant',serif;font-size:1.5rem;font-weight:700;margin-bottom:6px;color:var(--brown);}
+.plat-card p{font-size:.8rem;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.plat-note{
+  font-size:.72rem;color:var(--muted);font-style:italic;
+  background:var(--cream);border-radius:8px;padding:6px 12px;
+  margin-bottom:14px;line-height:1.5;
+}
+.plat-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:11px 24px;border-radius:12px;border:none;
+  font-size:.85rem;font-weight:700;color:#fff;
+  transition:.2s;cursor:pointer;width:100%;
+}
+.plat-btn:hover{opacity:.88;transform:translateY(-1px);}
+.plat-btn.wa-btn{background:#25d366;}
+.plat-btn.sw-btn{background:#fc8019;}
+.plat-btn.zo-btn{background:#e23744;}
+
+/* ════════════════════════════════════════════
+   TESTIMONIALS
+════════════════════════════════════════════ */
+.testi-sec{background:var(--cream);}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.testi-card{
+  background:#fff;border-radius:var(--rl);padding:28px;
+  border:1px solid var(--border);box-shadow:var(--sh-sm);
+  transition:.25s;
+}
+.testi-card:hover{box-shadow:var(--sh);transform:translateY(-4px);}
+.testi-stars{color:var(--gold);font-size:1rem;margin-bottom:12px;letter-spacing:1px;}
+.testi-text{
+  font-family:'Cormorant Garant',serif;font-style:italic;
+  font-size:1.12rem;color:var(--brown2);line-height:1.6;margin-bottom:18px;
+}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--g2);display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.1rem;font-weight:700;flex-shrink:0;
+}
+.testi-info h4{font-size:.88rem;font-weight:700;color:var(--text);}
+.testi-info p{font-size:.75rem;color:var(--muted);}
+
+/* ════════════════════════════════════════════
+   GALLERY
+════════════════════════════════════════════ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:12px;
+}
+.gallery-item{
+  border-radius:var(--r);overflow:hidden;
+  position:relative;aspect-ratio:1;cursor:pointer;
+}
+.gallery-item:first-child{grid-column:span 2;aspect-ratio:2/1;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:.5s;}
+.gallery-item:hover img{transform:scale(1.07);}
+.gallery-item-overlay{
+  position:absolute;inset:0;background:rgba(26,77,26,0);
+  display:flex;align-items:center;justify-content:center;
+  transition:.3s;
+}
+.gallery-item:hover .gallery-item-overlay{background:rgba(26,77,26,.35);}
+.gallery-item-overlay span{color:#fff;font-size:2rem;opacity:0;transition:.3s;transform:scale(.6);}
+.gallery-item:hover .gallery-item-overlay span{opacity:1;transform:scale(1);}
+
+/* ════════════════════════════════════════════
+   CONTACT
+════════════════════════════════════════════ */
+#contact{
+  background:url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1920&q=80&auto=format&fit=crop') center/cover fixed;
+  position:relative;
+}
+#contact::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(61,31,20,.93),rgba(26,77,26,.88));
+}
+.contact-inner{position:relative;z-index:1;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.contact-left h2{font-size:clamp(1.8rem,3.5vw,2.6rem);color:#fff;margin-bottom:12px;}
+.contact-left > p{color:rgba(255,255,255,.68);line-height:1.75;margin-bottom:28px;}
+.c-links{display:flex;flex-direction:column;gap:10px;}
+.c-link{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r);padding:14px 18px;
+  color:#fff;text-decoration:none;transition:.2s;
+}
+.c-link:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);}
+.c-link-ic{
+  width:42px;height:42px;border-radius:11px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
+}
+.c-link h4{font-size:.72rem;opacity:.55;font-weight:400;margin-bottom:2px;}
+.c-link p{font-size:.92rem;font-weight:600;}
+.contact-box{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--rl);padding:38px;backdrop-filter:blur(12px);
+}
+.contact-box h3{font-size:1.7rem;color:#fff;margin-bottom:10px;}
+.contact-box > p{color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.7;margin-bottom:24px;}
+.wa-btns{display:flex;flex-direction:column;gap:12px;}
+.wa-big{
+  width:100%;padding:15px 20px;border-radius:var(--r);font-size:.92rem;
+  font-weight:700;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;transition:.25s;
+}
+.wa-big.primary{background:#25d366;color:#fff;}
+.wa-big.primary:hover{background:#1da851;}
+.wa-big.outline{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);}
+.wa-big.outline:hover{background:rgba(255,255,255,.18);}
+
+/* ════════════════════════════════════════════
+   MAP
+════════════════════════════════════════════ */
+.map-wrap{height:360px;overflow:hidden;}
+.map-wrap iframe{width:100%;height:100%;border:0;display:block;}
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer{
+  background:#0e0e0e;color:rgba(255,255,255,.45);
+  padding:40px 5%;text-align:center;font-size:.8rem;line-height:2;
+}
+footer .flogo{font-family:'Cormorant Garant',serif;font-size:1.4rem;color:rgba(255,255,255,.82);margin-bottom:4px;}
+footer a{color:var(--gold2);}
+footer .flinks{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:10px 0;}
+footer .flinks a{color:rgba(255,255,255,.5);transition:.2s;}
+footer .flinks a:hover{color:var(--gold2);}
+
+/* ════════════════════════════════════════════
+   CART DRAWER
+════════════════════════════════════════════ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s;}
+.overlay.open{opacity:1;pointer-events:all;}
+.drawer{
+  position:fixed;top:0;bottom:0;right:-480px;width:100%;max-width:460px;
+  background:#fff;z-index:1001;display:flex;flex-direction:column;
+  box-shadow:var(--sh-xl);transition:right .38s var(--ease);
+}
+.drawer.open{right:0;}
+.drawer-hd{
+  padding:20px 22px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.drawer-hd h2{font-family:'Cormorant Garant',serif;font-size:1.35rem;color:var(--brown);}
+.close-x{background:none;border:none;font-size:1.4rem;color:var(--muted);cursor:pointer;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.close-x:hover{background:var(--border);}
+.drawer-bd{flex:1;overflow-y:auto;padding:18px 22px;}
+.empty-st{text-align:center;padding:60px 20px;}
+.empty-st .em{font-size:3.5rem;margin-bottom:12px;}
+.empty-st p{color:var(--muted);font-size:.9rem;}
+.cart-item{
+  display:flex;gap:12px;padding:13px 0;
+  border-bottom:1px solid var(--border);align-items:center;
+}
+.ci-em{
+  width:48px;height:48px;border-radius:12px;background:var(--g4);
+  display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;
+}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-size:.88rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ci-sub{font-size:.78rem;color:var(--g1);font-weight:600;margin-top:2px;}
+.ci-ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.ci-ctrl button{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--border);background:#fff;font-size:.85rem;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;}
+.ci-ctrl button:hover{border-color:var(--g1);color:var(--g1);}
+.ci-n{font-size:.85rem;font-weight:700;min-width:18px;text-align:center;}
+.drawer-ft{padding:16px 22px;border-top:1px solid var(--border);}
+.cart-tot{display:flex;justify-content:space-between;font-weight:700;font-size:1rem;color:var(--brown);margin-bottom:12px;}
+.finput{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:.85rem;font-family:inherit;outline:none;transition:.2s;margin-bottom:10px;}
+.finput:focus{border-color:var(--g2);}
+.wa-send{width:100%;background:#25d366;color:#fff;border:none;padding:15px;border-radius:12px;font-size:.95rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:.25s;}
+.wa-send:hover{background:#1da851;}
+.wa-foot-note{text-align:center;font-size:.72rem;color:var(--muted);margin-top:8px;}
+
+/* Wishlist drawer */
+.wl-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;}
+.wl-em{width:44px;height:44px;border-radius:11px;background:var(--g4);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.wl-info{flex:1;}
+.wl-info h4{font-size:.88rem;font-weight:700;}
+.wl-info p{font-size:.78rem;color:var(--g1);font-weight:600;}
+.wl-add{background:var(--g1);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;}
+.wl-add:hover{background:var(--g2);}
+.wl-rm{background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;margin-left:6px;}
+.wl-rm:hover{color:var(--r1);}
+
+/* ════════════════════════════════════════════
+   ADMIN
+════════════════════════════════════════════ */
+.admin-fab{
+  position:fixed;bottom:24px;left:24px;z-index:800;
+  width:46px;height:46px;border-radius:13px;
+  background:rgba(61,31,20,.85);backdrop-filter:blur(8px);
+  color:#fff;border:none;cursor:pointer;font-size:1.1rem;
+  box-shadow:var(--sh-lg);transition:.25s;
+}
+.admin-fab:hover{background:var(--g1);transform:scale(1.08);}
+.admin-ov{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px;}
+.admin-ov.open{display:flex;}
+.admin-box{background:#fff;border-radius:var(--rl);width:100%;max-width:720px;max-height:92vh;overflow-y:auto;box-shadow:var(--sh-xl);display:flex;flex-direction:column;}
+.admin-hd{padding:20px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;}
+.admin-hd h2{font-family:'Cormorant Garant',serif;font-size:1.3rem;color:var(--brown);}
+.admin-bd{padding:22px 26px;}
+.admin-login{text-align:center;padding:16px 0;}
+.admin-login p{color:var(--muted);margin-bottom:18px;font-size:.88rem;}
+.apin{
+  width:100%;max-width:270px;border:2px solid var(--border);border-radius:10px;
+  padding:12px 16px;font-size:.95rem;font-family:inherit;outline:none;
+  margin-bottom:14px;display:block;margin-left:auto;margin-right:auto;
+}
+.apin:focus{border-color:var(--g2);}
+.alogin-btn{background:var(--g1);color:#fff;border:none;padding:12px 32px;border-radius:10px;font-size:.92rem;font-weight:700;font-family:inherit;cursor:pointer;transition:.2s;}
+.alogin-btn:hover{background:var(--g2);}
+.atabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.atab{padding:8px 16px;border-radius:8px;border:2px solid var(--border);background:#fff;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--muted);transition:.2s;}
+.atab:hover{border-color:var(--g3);color:var(--g2);}
+.atab.active{background:var(--g1);color:#fff;border-color:var(--g1);}
+.asec{display:none;}
+.asec.active{display:block;}
+.amsg{padding:10px 16px;border-radius:8px;margin-bottom:14px;font-size:.82rem;font-weight:600;display:none;}
+.amsg.ok{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0;display:block;}
+.amsg.err{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;display:block;}
+.acat-sel{padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;outline:none;margin-bottom:14px;width:100%;}
+.acat-sel:focus{border-color:var(--g2);}
+.pad-list{display:flex;flex-direction:column;gap:8px;}
+.pad-row{display:grid;grid-template-columns:48px 1fr 1fr 80px auto auto;gap:7px;align-items:center;background:#f9fafb;border-radius:10px;padding:10px 12px;}
+.pinput{border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;font-size:.82rem;font-family:inherit;outline:none;width:100%;}
+.pinput:focus{border-color:var(--g2);}
+.psave{background:var(--g1);color:#fff;border:none;padding:7px 12px;border-radius:7px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+.pdel{background:#fee2e2;color:#991b1b;border:none;padding:7px 10px;border-radius:7px;font-size:.82rem;font-weight:700;cursor:pointer;}
+.add-form-box{background:var(--g4);border-radius:var(--r);padding:20px;margin-top:16px;}
+.add-form-box h4{font-size:.9rem;font-weight:700;color:var(--g1);margin-bottom:12px;}
+.frow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.frow input,.frow select{flex:1;min-width:120px;border:1.5px solid #c3dac7;border-radius:8px;padding:9px 12px;font-size:.83rem;font-family:inherit;outline:none;background:#fff;}
+.frow input:focus{border-color:var(--g2);}
+.fadd-btn{background:var(--g1);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:.85rem;font-weight:700;font-family:inherit;cursor:pointer;margin-top:6px;}
+.fadd-btn:hover{background:var(--g2);}
+.sform label{display:block;font-size:.8rem;font-weight:600;color:var(--text);margin-top:14px;margin-bottom:5px;}
+.sinput{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.85rem;font-family:inherit;outline:none;}
+.sinput:focus{border-color:var(--g2);}
+.ssave{background:var(--g1);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:.9rem;font-weight:700;font-family:inherit;cursor:pointer;margin-top:18px;transition:.2s;}
+.ssave:hover{background:var(--g2);}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media(max-width:960px){
+  .hero-badge-wrap{display:none;}
+  .whyus-grid,.contact-grid{grid-template-columns:1fr;gap:40px;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-item:first-child{grid-column:span 2;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .sec{padding:64px 0;}
+  .pad-row{grid-template-columns:40px 1fr 70px auto;}
+  .pad-row .pinput:nth-child(3){display:none;}
+  .hero-content{margin-left:0;}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr;}
+  .gallery-item:first-child{grid-column:span 1;aspect-ratio:1;}
+  .drawer{max-width:100%;}
+  .admin-box{max-height:100vh;border-radius:0;}
+  .stat{min-width:110px;}
+}
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- ════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <!-- Logo SVG -->
+    <a href="#home" aria-label="Palm Cafe Home">
+      <svg height="46" viewBox="0 0 260 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Palm Tree -->
+        <g>
+          <!-- Trunk -->
+          <path d="M68 62 Q66 48 64 32" stroke="#7b1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <!-- Fronds -->
+          <path d="M64 32 Q52 20 40 24" stroke="#7b1a1a" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M64 32 Q58 18 63 8" stroke="#7b1a1a" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M64 32 Q72 18 84 20" stroke="#7b1a1a" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M64 32 Q76 22 86 26" stroke="#7b1a1a" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+          <path d="M64 32 Q52 26 46 34" stroke="#7b1a1a" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+          <path d="M64 32 Q62 20 56 12" stroke="#7b1a1a" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+          <!-- Tips -->
+          <circle cx="40" cy="24" r="2.5" fill="#7b1a1a"/>
+          <circle cx="63" cy="8" r="2.5" fill="#7b1a1a"/>
+          <circle cx="84" cy="20" r="2.5" fill="#7b1a1a"/>
+          <circle cx="86" cy="26" r="2" fill="#7b1a1a"/>
+          <circle cx="56" cy="12" r="2" fill="#7b1a1a"/>
+        </g>
+        <!-- Text: Palmcafe -->
+        <text x="6" y="63" font-family="'Cormorant Garant',Georgia,serif" font-size="34" font-weight="700" fill="white" letter-spacing="-0.5">Palmcafe</text>
+      </svg>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#order">Order</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="openWL()" title="Wishlist">❤️<span class="nbadge" id="wlBadge"></span></button>
+      <button class="nav-icon-btn" onclick="openCart()" title="Cart">🛒<span class="nbadge" id="cartBadge"></span></button>
+      <button class="nav-cta" onclick="scrollTo({top:document.getElementById('menu').offsetTop-80,behavior:'smooth'})">🍹 Order Now</button>
+      <button class="hamburger" id="hbg" onclick="toggleMob()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mob-nav" id="mobNav">
+  <a href="#home" onclick="closeMob()">🏠 Home</a>
+  <a href="#menu" onclick="closeMob()">🍹 Menu</a>
+  <a href="#order" onclick="closeMob()">📱 Order Online</a>
+  <a href="#about" onclick="closeMob()">🌿 About Us</a>
+  <a href="#contact" onclick="closeMob()">📍 Contact</a>
+  <a href="javascript:void(0)" onclick="openCart();closeMob()">🛒 Cart</a>
+  <a href="javascript:void(0)" onclick="openWL();closeMob()">❤️ Wishlist</a>
+</div>
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <span class="hero-script">Chennai's Finest</span>
+    <h1>Nourish Your<br>Body with<br><em>Nature's Best</em></h1>
+    <p class="hero-tagline">THE HEALTHY FOOD JOINT · UTHANDI, CHENNAI</p>
+    <p>Handcrafted smoothies, cold-pressed juices and wholesome meals made fresh every day — zero preservatives, 100% pure goodness.</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="scrollTo({top:document.getElementById('menu').offsetTop-80,behavior:'smooth'})">🍹 Explore Menu</button>
+      <button class="btn-ghost" onclick="openCart()">🛒 My Cart</button>
+    </div>
+  </div>
+
+  <!-- Floating cards – desktop only -->
+  <div class="hero-badge-wrap">
+    <div class="hbadge">
+      <span class="hbadge-icon">⭐</span>
+      <div><strong>4.8 / 5 Rating</strong><span>500+ happy customers</span></div>
+    </div>
+    <div class="hbadge">
+      <span class="hbadge-icon">🌿</span>
+      <div><strong>100% Natural</strong><span>Zero preservatives</span></div>
+    </div>
+    <div class="hbadge">
+      <span class="hbadge-icon">💬</span>
+      <div><strong>WhatsApp Orders</strong><span>Reply in &lt; 2 minutes</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-ind"><span>SCROLL</span><div class="scroll-dot"></div></div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat"><div class="n">20+</div><div class="l">Menu Items</div></div>
+  <div class="stat"><div class="n">100%</div><div class="l">Fresh Daily</div></div>
+  <div class="stat"><div class="n">0</div><div class="l">Preservatives</div></div>
+  <div class="stat"><div class="n">⭐ 4.8</div><div class="l">Customer Rating</div></div>
+  <div class="stat"><div class="n">&lt;2 min</div><div class="l">WA Response</div></div>
+</div>
+
+<!-- Addons bar -->
+<div class="addons-bar">
+  <div class="addon-chip"><div class="ic">🍯</div><div><h4>Honey Add-on</h4><p>Natural sweetness — only ₹7</p></div></div>
+  <div class="addon-chip"><div class="ic">🌿</div><div><h4>Stevia Add-on</h4><p>Zero-calorie sweetener — only ₹10</p></div></div>
+  <div class="addon-chip"><div class="ic">🧊</div><div><h4>Customise Your Blend</h4><p>Hot, cold, extra ice — your choice</p></div></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     WHY US
+════════════════════════════════════════════ -->
+<section class="sec" id="about">
+  <div class="container">
+    <div class="whyus-grid">
+      <div class="whyus-img reveal-l">
+        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=800&q=85&auto=format&fit=crop" alt="Fresh smoothies at Palm Cafe" loading="lazy">
+        <div class="whyus-img-overlay"></div>
+        <div class="whyus-img-badge">
+          <span class="big">5+</span>
+          <div style="color:#fff;">
+            <strong style="display:block;font-size:.9rem;">Years of</strong>
+            <span style="font-size:.75rem;opacity:.75;">Healthy Living</span>
+          </div>
+        </div>
+      </div>
+      <div class="whyus-text reveal-r">
+        <div class="tag">🌱 Our Story</div>
+        <h2 class="sec-title">We Believe Healthy Food Should Taste <span class="script" style="color:var(--g2);">Amazing</span></h2>
+        <p>At Palm Cafe, we source the freshest local produce every single day. From tropical fruits to nutrient-packed seeds, every ingredient is chosen with your health in mind.</p>
+        <p>Our blends are crafted with care — no artificial flavors, no refined sugar, no shortcuts. Just pure, wholesome goodness in every sip.</p>
+        <div class="values">
+          <div class="val-card">
+            <div class="val-ic">🌱</div>
+            <div class="val-text"><h4>100% Natural Ingredients</h4><p>No artificial colors, flavors, or preservatives — guaranteed.</p></div>
+          </div>
+          <div class="val-card">
+            <div class="val-ic">🥦</div>
+            <div class="val-text"><h4>Sourced Fresh Every Morning</h4><p>Produce bought fresh daily from trusted local suppliers.</p></div>
+          </div>
+          <div class="val-card">
+            <div class="val-ic">💪</div>
+            <div class="val-text"><h4>Nutrition-First Approach</h4><p>Every item on our menu is designed to fuel your body right.</p></div>
+          </div>
+          <div class="val-card">
+            <div class="val-ic">🚀</div>
+            <div class="val-text"><h4>Fast WhatsApp Delivery</h4><p>Order via cart, we reply in under 2 minutes.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     MENU
+════════════════════════════════════════════ -->
+<section class="sec" id="menu" style="background:var(--cream);">
+  <div class="container">
+    <div class="menu-hdr reveal">
+      <div class="tag">🌿 Our Menu</div>
+      <h2 class="sec-title">Fresh &amp; Healthy Favourites</h2>
+      <p class="sec-sub" style="margin:10px auto 0;">Every item made-to-order with fresh produce. Zero preservatives, maximum nutrition.</p>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="showTab('smoothies',this)">🥤 Smoothies</button>
+      <button class="tab-btn" onclick="showTab('juices',this)">🍊 Juices</button>
+      <button class="tab-btn" onclick="showTab('milkshakes',this)">🥛 Milkshakes</button>
+      <button class="tab-btn" onclick="showTab('food',this)">🍱 Food &amp; Snacks</button>
+    </div>
+    <div id="pan-smoothies" class="menu-panel active"><div class="prod-grid" id="grid-smoothies"></div></div>
+    <div id="pan-juices"    class="menu-panel"><div class="prod-grid" id="grid-juices"></div></div>
+    <div id="pan-milkshakes" class="menu-panel"><div class="prod-grid" id="grid-milkshakes"></div></div>
+    <div id="pan-food"      class="menu-panel"><div class="prod-grid" id="grid-food"></div></div>
+  </div>
+</section>
+
+<!-- Full-width image divider -->
+<div class="img-divider">
+  <div class="img-divider-content">
+    <span class="script">Order in 3 easy steps</span>
+    <h2>Pick → Cart → WhatsApp →&nbsp;Enjoy!</h2>
+    <p>Browse the menu, add your favourites to the cart, and send your order to us via WhatsApp. We confirm within minutes and deliver fresh to your door.</p>
+    <button class="btn-gold" onclick="scrollTo({top:document.getElementById('order').offsetTop-80,behavior:'smooth'})">📱 See Ordering Options</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ORDER PLATFORMS
+════════════════════════════════════════════ -->
+<section class="sec" id="order">
+  <div class="container">
+    <div class="order-hdr reveal">
+      <div class="tag">📱 Order Online</div>
+      <h2 class="sec-title sec-center">Multiple Ways to Order</h2>
+      <p class="sec-sub sec-center" style="margin:10px auto 0;">Choose your preferred platform below. WhatsApp is the fastest!</p>
+    </div>
+    <div class="platforms-wrap">
+
+      <!-- WhatsApp -->
+      <div class="plat-card wa-card reveal">
+        <div class="plat-inner">
+          <span class="plat-icon-wrap">💬</span>
+          <h3>WhatsApp</h3>
+          <p>Add items to your cart, enter your name, and your complete order flies to our WhatsApp — we confirm in under 2 minutes!</p>
+          <div class="plat-note">✅ Fastest option · Direct with our team · Custom requests welcome</div>
+          <button class="plat-btn wa-btn" onclick="openCart()">🛒 Open Cart &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- Swiggy -->
+      <div class="plat-card sw-card reveal">
+        <div class="plat-inner">
+          <span class="plat-icon-wrap">🛵</span>
+          <h3>Swiggy</h3>
+          <p>Order through Swiggy for tracked doorstep delivery. Once you click, our Swiggy restaurant page opens in a new tab.</p>
+          <div class="plat-note" id="swiggy-note">⏳ Getting listed on Swiggy soon! Use WhatsApp for now.</div>
+          <button class="plat-btn sw-btn" id="swiggy-btn" onclick="handlePlatform('swiggy')">Order on Swiggy →</button>
+        </div>
+      </div>
+
+      <!-- Zomato -->
+      <div class="plat-card zo-card reveal">
+        <div class="plat-inner">
+          <span class="plat-icon-wrap">🍽️</span>
+          <h3>Zomato</h3>
+          <p>Find us on Zomato, read reviews, and place your order. Clicking opens our Zomato restaurant page directly.</p>
+          <div class="plat-note" id="zomato-note">⏳ Getting listed on Zomato soon! Use WhatsApp for now.</div>
+          <button class="plat-btn zo-btn" id="zomato-btn" onclick="handlePlatform('zomato')">Order on Zomato →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════ -->
+<section class="sec testi-sec">
+  <div class="container">
+    <div class="sec-center reveal" style="margin-bottom:48px;">
+      <div class="tag">💬 Reviews</div>
+      <h2 class="sec-title">What Our Customers Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The ABC Immunity Boost is my everyday go-to. Absolutely fresh, no artificial taste, and I feel the energy throughout the day. Best smoothie in Chennai!"</p>
+        <div class="testi-author"><div class="testi-avatar">P</div><div class="testi-info"><h4>Priya S.</h4><p>Uthandi, Chennai</p></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ordered via WhatsApp and got a reply in less than 2 minutes. The Avocado Breezy Delight was creamy perfection. Fresh, healthy, and delivered with a smile!"</p>
+        <div class="testi-author"><div class="testi-avatar">R</div><div class="testi-info"><h4>Rajan K.</h4><p>ECR, Chennai</p></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Palm Cafe is a gem! The Cocoberry Dream is out of this world. You can literally taste how fresh the ingredients are. My family orders every weekend now."</p>
+        <div class="testi-author"><div class="testi-avatar">A</div><div class="testi-info"><h4>Anitha M.</h4><p>Kanathur, Chennai</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     GALLERY
+════════════════════════════════════════════ -->
+<section class="sec-sm" style="background:var(--cream);">
+  <div class="container">
+    <div class="sec-center reveal" style="margin-bottom:36px;">
+      <div class="tag">📸 Gallery</div>
+      <h2 class="sec-title">Fresh From Our Kitchen</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1638176867002-6aa4d62be29d?w=900&q=80&auto=format&fit=crop" alt="Smoothie bowls" loading="lazy">
+        <div class="gallery-item-overlay"><span>🍹</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=600&q=80&auto=format&fit=crop" alt="Fresh juice" loading="lazy">
+        <div class="gallery-item-overlay"><span>🍊</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600&q=80&auto=format&fit=crop" alt="Healthy bowl" loading="lazy">
+        <div class="gallery-item-overlay"><span>🥗</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80&auto=format&fit=crop" alt="Healthy food" loading="lazy">
+        <div class="gallery-item-overlay"><span>🥑</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1594631661960-34c6f5e929d1?w=600&q=80&auto=format&fit=crop" alt="Berry smoothie" loading="lazy">
+        <div class="gallery-item-overlay"><span>🫐</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════ -->
+<section class="sec" id="contact">
+  <div class="contact-inner">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-left reveal-l">
+          <div class="tag tag-dark">📍 Find Us</div>
+          <h2>Visit or Order from<br>Palm Cafe</h2>
+          <p>We're in the heart of Uthandi, Chennai. Drop by or order fresh from anywhere!</p>
+          <div class="c-links">
+            <a class="c-link" href="https://wa.me/918925962259" target="_blank" rel="noopener">
+              <div class="c-link-ic">💬</div>
+              <div><h4>WhatsApp (Primary)</h4><p>+91 89259 62259</p></div>
+            </a>
+            <a class="c-link" href="https://wa.me/918925893320" target="_blank" rel="noopener">
+              <div class="c-link-ic">💬</div>
+              <div><h4>WhatsApp (Secondary)</h4><p>+91 89258 93320</p></div>
+            </a>
+            <div class="c-link">
+              <div class="c-link-ic">📍</div>
+              <div><h4>Address</h4><p id="cafe-address">No 17, Kovalan Street, 2nd Main Road,<br>Uthandi Kanathur, Chennai – 600 119</p></div>
+            </div>
+            <div class="c-link">
+              <div class="c-link-ic">🕐</div>
+              <div><h4>Hours</h4><p id="cafe-hours">Mon – Sun: 8:00 AM – 10:00 PM</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-box reveal-r">
+          <h3>🛒 Place Your Order</h3>
+          <p>Browse the menu, add items to cart, and your complete order is sent to our WhatsApp in one tap. Our team confirms instantly!</p>
+          <div class="wa-btns">
+            <button class="wa-big primary" onclick="openCart()">🛒 View Cart &amp; Place Order</button>
+            <a class="wa-big outline" href="https://wa.me/918925962259?text=Hi%20Palm%20Cafe!%20I%27d%20like%20to%20know%20more%20about%20your%20menu." target="_blank" rel="noopener" style="text-decoration:none;">💬 Chat With Us on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<div class="map-wrap">
+  <iframe
+    src="https://maps.google.com/maps?q=Uthandi+Kanathur+Chennai+600119&output=embed&z=15"
+    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+    title="Palm Cafe – Uthandi Kanathur, Chennai 600119">
+  </iframe>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="flogo">🌴 Palmcafe</div>
+  <p>The Healthy Food Joint</p>
+  <div class="flinks">
+    <a href="#menu">Menu</a>
+    <a href="#order">Order</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/918925962259" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <p>📍 No 17, Kovalan Street, 2nd Main Road, Uthandi Kanathur, Chennai – 600 119</p>
+  <p>📞 <a href="tel:+918925962259">+91 89259 62259</a> &nbsp;|&nbsp; <a href="tel:+918925893320">+91 89258 93320</a></p>
+  <p style="margin-top:10px;font-size:.72rem;">© 2024 Palm Cafe. All rights reserved. Made with ❤️ for health lovers.</p>
+</footer>
+
+<!-- ════════════════════════════════════════════
+     CART DRAWER
+════════════════════════════════════════════ -->
+<div class="overlay" id="cartOv" onclick="closeCart()"></div>
+<div class="drawer" id="cartDr" role="dialog" aria-label="Cart" aria-modal="true">
+  <div class="drawer-hd">
+    <h2>🛒 Your Cart</h2>
+    <button class="close-x" onclick="closeCart()" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-bd" id="cartBd"></div>
+  <div class="drawer-ft">
+    <div class="cart-tot"><span>Order Total</span><span id="cartTot">₹0</span></div>
+    <input class="finput" id="custName" type="text" placeholder="Your name *" autocomplete="name">
+    <input class="finput" id="custNote" type="text" placeholder="Special instructions (optional)">
+    <button class="wa-send" onclick="sendOrder()">💬 Send Order via WhatsApp</button>
+    <p class="wa-foot-note">Your order details will be sent to +91 89259 62259</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     WISHLIST DRAWER
+════════════════════════════════════════════ -->
+<div class="overlay" id="wlOv" onclick="closeWL()"></div>
+<div class="drawer" id="wlDr" role="dialog" aria-label="Wishlist" aria-modal="true">
+  <div class="drawer-hd">
+    <h2>❤️ Saved Items</h2>
+    <button class="close-x" onclick="closeWL()" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-bd" id="wlBd"></div>
+  <div class="drawer-ft">
+    <button class="wa-send" style="background:var(--r1);" onclick="wlToCart()">🛒 Add All to Cart</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ADMIN
+════════════════════════════════════════════ -->
+<button class="admin-fab" onclick="openAdmin()" title="Admin">⚙️</button>
+<div class="admin-ov" id="adminOv">
+  <div class="admin-box">
+    <div class="admin-hd">
+      <h2>⚙️ Admin Panel</h2>
+      <button class="close-x" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-bd">
+      <div id="amsg" class="amsg"></div>
+      <div id="aLogin" class="admin-login">
+        <p>Enter admin password to manage products and settings.</p>
+        <input type="password" class="apin" id="aPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="alogin-btn" onclick="doLogin()">Login →</button>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:12px;">Default: <code>palmcafe2024</code></p>
+      </div>
+      <div id="aMain" style="display:none;">
+        <div class="atabs">
+          <button class="atab active" onclick="aTab('products',this)">🍹 Products</button>
+          <button class="atab" onclick="aTab('settings',this)">⚙️ Settings</button>
+        </div>
+        <!-- Products -->
+        <div class="asec active" id="asec-products">
+          <select class="acat-sel" id="aCat" onchange="renderAP()">
+            <option value="smoothies">🥤 Smoothies</option>
+            <option value="juices">🍊 Juices</option>
+            <option value="milkshakes">🥛 Milkshakes</option>
+            <option value="food">🍱 Food & Snacks</option>
+          </select>
+          <div class="pad-list" id="aPList"></div>
+          <div class="add-form-box">
+            <h4>➕ Add New Product</h4>
+            <div class="frow">
+              <input type="text" id="np-em" placeholder="Emoji 🥤" style="max-width:70px;">
+              <input type="text" id="np-nm" placeholder="Product name *">
+              <input type="number" id="np-pr" placeholder="Price ₹ *" style="max-width:100px;">
+            </div>
+            <div class="frow">
+              <input type="text" id="np-dc" placeholder="Description">
+              <input type="text" id="np-bd" placeholder="Badge (e.g. Popular)" style="max-width:140px;">
+            </div>
+            <button class="fadd-btn" onclick="addProd()">Add Product</button>
+          </div>
+        </div>
+        <!-- Settings -->
+        <div class="asec" id="asec-settings">
+          <div class="sform">
+            <label>WhatsApp Number 1 (orders sent here — include country code)</label>
+            <input type="tel" class="sinput" id="s-wa1" placeholder="918925962259">
+            <label>WhatsApp Number 2</label>
+            <input type="tel" class="sinput" id="s-wa2" placeholder="918925893320">
+            <label>Cafe Address</label>
+            <input type="text" class="sinput" id="s-addr">
+            <label>Opening Hours</label>
+            <input type="text" class="sinput" id="s-hrs">
+            <label>Swiggy Restaurant URL — paste AFTER you get listed on Swiggy</label>
+            <input type="url" class="sinput" id="s-sw" placeholder="https://www.swiggy.com/restaurants/palm-cafe-...">
+            <label>Zomato Restaurant URL — paste AFTER you get listed on Zomato</label>
+            <input type="url" class="sinput" id="s-zo" placeholder="https://www.zomato.com/chennai/palm-cafe-...">
+            <label>Change Admin Password (leave blank to keep current)</label>
+            <input type="password" class="sinput" id="s-pw" placeholder="New password">
+            <button class="ssave" onclick="saveSettings()">💾 Save All Settings</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ─── DEFAULT DATA ─── */
+const DEF = {
+  pass:'palmcafe2024',
+  wa1:'918925962259',
+  wa2:'918925893320',
+  address:'No 17, Kovalan Street, 2nd Main Road,\nUthandi Kanathur, Chennai – 600 119',
+  hours:'Mon – Sun: 8:00 AM – 10:00 PM',
+  swiggyLink:'',
+  zomatoLink:'',
+  products:{
+    smoothies:[
+      {id:'s1',name:'Dragon Energy Blend',price:110,desc:'Energising dragon fruit blend packed with antioxidants and natural vitality.',emoji:'🔴',badge:'Popular'},
+      {id:'s2',name:'Guava Mint Refresher',price:112,desc:'Cooling guava blended with fresh mint leaves — a tropical breath of fresh air.',emoji:'🟢',badge:''},
+      {id:'s3',name:'Papaya Paradise',price:117,desc:'Creamy papaya smoothie rich in digestive enzymes and natural Vitamins.',emoji:'🟠',badge:''},
+      {id:'s4',name:'Carrot Glow',price:118,desc:'Beta-carotene rich carrot blend for glowing skin and sharper vision.',emoji:'🥕',badge:''},
+      {id:'s5',name:'Chickoo Blast',price:120,desc:'Sweet, creamy chickoo smoothie packed with natural slow-release energy.',emoji:'🟤',badge:''},
+      {id:'s6',name:'ABC Immunity Boost',price:125,desc:'Apple, Beetroot & Carrot — the ultimate immunity-boosting power trio.',emoji:'❤️',badge:'Best Seller'},
+      {id:'s7',name:'Fig Indulgence',price:128,desc:'Rich, earthy fig smoothie loaded with dietary fibre and iron.',emoji:'🫐',badge:''},
+      {id:'s8',name:'Nuts & Seeds Pulse',price:155,desc:'Protein-packed blend of premium nuts, seeds and superfoods.',emoji:'🥜',badge:'High Protein'},
+      {id:'s9',name:'Tender Coco Fusion',price:173,desc:'Fresh tender coconut blended to smooth, tropical perfection.',emoji:'🥥',badge:''},
+      {id:'s10',name:'Avocado Breezy Delight',price:175,desc:'Creamy avocado smoothie with heart-healthy fats and a refreshing finish.',emoji:'🥑',badge:"Chef's Pick"},
+      {id:'s11',name:'Beet Berry Energizer',price:210,desc:'Beetroot and mixed berries — power-packed, vibrant and ultra-refreshing.',emoji:'🫀',badge:''},
+      {id:'s12',name:'Cocoberry Dream',price:222,desc:'Coconut and berry fusion — exotic, tropical and utterly indulgent.',emoji:'🌴',badge:'Premium'}
+    ],
+    juices:[
+      {id:'j1',name:'Orange Sunrise',price:80,desc:'Freshly squeezed orange juice, bursting with Vitamin C and natural sweetness.',emoji:'🍊',badge:'Fresh'},
+      {id:'j2',name:'Watermelon Wave',price:75,desc:'Cold-pressed watermelon juice — pure summer refreshment in a glass.',emoji:'🍉',badge:''},
+      {id:'j3',name:'Pineapple Zing',price:90,desc:'Tangy pineapple juice with a kick of fresh ginger and mint.',emoji:'🍍',badge:'Tangy'},
+      {id:'j4',name:'Green Detox',price:110,desc:'Cucumber, spinach, lemon & ginger — your daily full-body detox.',emoji:'🥒',badge:'Detox'}
+    ],
+    milkshakes:[
+      {id:'m1',name:'Mango Masti Shake',price:130,desc:'Thick, creamy mango milkshake made with premium Alphonso mangoes.',emoji:'🥭',badge:'Seasonal'},
+      {id:'m2',name:'Strawberry Dream',price:140,desc:'Luscious fresh strawberry milkshake — thick, creamy and indulgent.',emoji:'🍓',badge:''},
+      {id:'m3',name:'Banana Peanut Butter',price:150,desc:'Rich banana and peanut butter shake — your ultimate protein boost.',emoji:'🍌',badge:'Protein'},
+      {id:'m4',name:'Dark Chocolate Bliss',price:160,desc:'Deep dark chocolate shake with roasted cocoa richness.',emoji:'🍫',badge:'Indulgent'}
+    ],
+    food:[
+      {id:'f1',name:'Acai Bowl',price:180,desc:'Thick blended acai base topped with granola, fresh fruits and a honey drizzle.',emoji:'🫐',badge:'Trending'},
+      {id:'f2',name:'Sprout Salad',price:120,desc:'Mixed sprouts tossed with lemon, chaat masala, herbs and fresh vegetables.',emoji:'🥗',badge:'Vegan'},
+      {id:'f3',name:'Multigrain Wrap',price:150,desc:'Wholesome multigrain wrap stuffed with colourful veggies and creamy hummus.',emoji:'🌯',badge:''},
+      {id:'f4',name:'Chia Pudding',price:140,desc:'Overnight chia pudding with coconut milk, vanilla and seasonal fruits.',emoji:'🍮',badge:'Healthy'}
+    ]
+  }
+};
+
+/* ─── STORE ─── */
+function loadStore(){
+  try{const d=localStorage.getItem('pc_v3');return d?JSON.parse(d):JSON.parse(JSON.stringify(DEF));}
+  catch{return JSON.parse(JSON.stringify(DEF));}
+}
+function persist(){try{localStorage.setItem('pc_v3',JSON.stringify(store));}catch{}}
+let store=loadStore();
+
+/* ─── STATE ─── */
+let cart={};
+let wl={};
+
+/* ─── TOAST ─── */
+function toast(msg,ms=2600){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),ms);
+}
+
+/* ─── BADGES ─── */
+function refreshBadges(){
+  const cq=Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  const wq=Object.keys(wl).length;
+  const cb=document.getElementById('cartBadge');
+  const wb=document.getElementById('wlBadge');
+  if(cb){cb.textContent=cq||'';cb.style.display=cq?'flex':'none';}
+  if(wb){wb.textContent=wq||'';wb.style.display=wq?'flex':'none';}
+}
+
+/* ─── CAT BG CLASS ─── */
+const bgCls={smoothies:'smoothies-bg',juices:'juices-bg',milkshakes:'milkshakes-bg',food:'food-bg'};
+const catEm={smoothies:'🥤',juices:'🍊',milkshakes:'🥛',food:'🍱'};
+
+/* ─── RENDER PRODUCTS ─── */
+function renderProducts(){
+  ['smoothies','juices','milkshakes','food'].forEach(cat=>{
+    const g=document.getElementById('grid-'+cat);
+    if(!g)return;
+    g.innerHTML='';
+    (store.products[cat]||[]).forEach(p=>{
+      const qty=cart[p.id]?.qty||0;
+      const inWL=!!wl[p.id];
+      const em=p.emoji||catEm[cat];
+      const d=document.createElement('div');
+      d.className='prod-card';
+      d.innerHTML=`
+        <div class="prod-img ${bgCls[cat]}">
+          <span class="prod-emoji">${em}</span>
+          ${p.badge?`<div class="prod-badge-wrap"><span class="prod-badge">${p.badge}</span></div>`:''}
+          <button class="wl-btn${inWL?' active':''}" onclick="toggleWL('${p.id}','${cat}')" aria-label="${inWL?'Remove from':'Add to'} wishlist">${inWL?'❤️':'🤍'}</button>
+        </div>
+        <div class="prod-body">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="prod-footer">
+            <div class="prod-price">₹${p.price}</div>
+            ${qty===0
+              ?`<button class="add-btn" onclick="addToCart('${p.id}','${cat}')" aria-label="Add to cart">+</button>`
+              :`<div class="qty-ctrl">
+                  <button onclick="chQty('${p.id}',-1)" aria-label="Decrease">−</button>
+                  <span class="qn">${qty}</span>
+                  <button onclick="chQty('${p.id}',1)" aria-label="Increase">+</button>
+                </div>`
+            }
+          </div>
+        </div>`;
+      g.appendChild(d);
+    });
+  });
+}
+
+function findProd(id){
+  for(const c of Object.keys(store.products)){
+    const p=store.products[c].find(x=>x.id===id);if(p)return{p,c};
+  }
+  return null;
+}
+
+/* ─── CART ─── */
+function addToCart(id,cat){
+  const prods=store.products[cat]||[];
+  const p=prods.find(x=>x.id===id);if(!p)return;
+  if(cart[id])cart[id].qty++;
+  else cart[id]={name:p.name,price:p.price,emoji:p.emoji||catEm[cat],qty:1};
+  toast(`✅ ${p.name} added to cart`);
+  renderProducts();renderCart();refreshBadges();
+}
+function chQty(id,d){
+  if(!cart[id])return;
+  cart[id].qty+=d;
+  if(cart[id].qty<=0)delete cart[id];
+  renderProducts();renderCart();refreshBadges();
+}
+function cartDelta(id,d){
+  if(!cart[id])return;
+  cart[id].qty+=d;
+  if(cart[id].qty<=0)delete cart[id];
+  renderCart();renderProducts();refreshBadges();
+}
+function renderCart(){
+  const bd=document.getElementById('cartBd');
+  const total=Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cartTot').textContent='₹'+total;
+  if(!Object.keys(cart).length){
+    bd.innerHTML=`<div class="empty-st"><div class="em">🛒</div><p>Your cart is empty.<br>Browse the menu and add items!</p></div>`;
+    return;
+  }
+  bd.innerHTML=Object.entries(cart).map(([id,item])=>`
+    <div class="cart-item">
+      <div class="ci-em">${item.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-sub">₹${item.price} × ${item.qty} = ₹${item.price*item.qty}</div>
+      </div>
+      <div class="ci-ctrl">
+        <button onclick="cartDelta('${id}',-1)" aria-label="Decrease">−</button>
+        <span class="ci-n">${item.qty}</span>
+        <button onclick="cartDelta('${id}',1)" aria-label="Increase">+</button>
+      </div>
+    </div>`).join('');
+}
+function openCart(){
+  closeWL();
+  document.getElementById('cartOv').classList.add('open');
+  document.getElementById('cartDr').classList.add('open');
+  renderCart();
+  document.getElementById('custName').focus();
+}
+function closeCart(){
+  document.getElementById('cartOv').classList.remove('open');
+  document.getElementById('cartDr').classList.remove('open');
+}
+function sendOrder(){
+  const name=document.getElementById('custName').value.trim();
+  const note=document.getElementById('custNote').value.trim();
+  if(!name){toast('⚠️ Please enter your name');document.getElementById('custName').focus();return;}
+  const items=Object.values(cart);
+  if(!items.length){toast('⚠️ Your cart is empty!');return;}
+  const total=items.reduce((s,i)=>s+i.price*i.qty,0);
+  let msg=`🌴 *New Order – Palm Cafe*\n\n`;
+  msg+=`👤 *Name:* ${name}\n\n🛒 *Order:*\n`;
+  items.forEach(i=>{msg+=`• ${i.emoji} ${i.name} × ${i.qty} = ₹${i.price*i.qty}\n`;});
+  msg+=`\n💰 *Total: ₹${total}*`;
+  if(note)msg+=`\n📝 *Note:* ${note}`;
+  msg+=`\n\n_Kindly confirm this order. Thank you! 🙏_`;
+  window.open(`https://wa.me/${store.wa1||'918925962259'}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+/* ─── WISHLIST ─── */
+function toggleWL(id,cat){
+  if(wl[id]){
+    delete wl[id];toast('Removed from wishlist');
+  } else {
+    const p=(store.products[cat]||[]).find(x=>x.id===id);
+    if(p)wl[id]={name:p.name,price:p.price,emoji:p.emoji||catEm[cat]};
+    toast('❤️ Saved to wishlist');
+  }
+  renderProducts();renderWL();refreshBadges();
+}
+function renderWL(){
+  const bd=document.getElementById('wlBd');
+  const items=Object.entries(wl);
+  if(!items.length){
+    bd.innerHTML=`<div class="empty-st"><div class="em">❤️</div><p>No saved items yet.<br>Tap 🤍 on any product to save it!</p></div>`;
+    return;
+  }
+  bd.innerHTML=items.map(([id,item])=>`
+    <div class="wl-item">
+      <div class="wl-em">${item.emoji}</div>
+      <div class="wl-info"><h4>${item.name}</h4><p>₹${item.price}</p></div>
+      <button class="wl-add" onclick="wlAddOne('${id}')">+ Cart</button>
+      <button class="wl-rm" onclick="wlRemove('${id}')" aria-label="Remove">✕</button>
+    </div>`).join('');
+}
+function wlAddOne(id){
+  const item=wl[id];if(!item)return;
+  if(cart[id])cart[id].qty++;
+  else cart[id]={...item,qty:1};
+  toast(`✅ ${item.name} added to cart`);
+  renderWL();renderCart();renderProducts();refreshBadges();
+}
+function wlRemove(id){delete wl[id];renderWL();renderProducts();refreshBadges();}
+function wlToCart(){
+  const items=Object.entries(wl);
+  if(!items.length){toast('Wishlist is empty');return;}
+  items.forEach(([id,item])=>{if(cart[id])cart[id].qty++;else cart[id]={...item,qty:1};});
+  toast(`🛒 ${items.length} item(s) added to cart`);
+  renderCart();renderProducts();refreshBadges();
+}
+function openWL(){
+  closeCart();
+  document.getElementById('wlOv').classList.add('open');
+  document.getElementById('wlDr').classList.add('open');
+  renderWL();
+}
+function closeWL(){
+  document.getElementById('wlOv').classList.remove('open');
+  document.getElementById('wlDr').classList.remove('open');
+}
+
+/* ─── TABS ─── */
+function showTab(tab,btn){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pan-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ─── PLATFORM BUTTONS ─── */
+function handlePlatform(which){
+  const link=which==='swiggy'?store.swiggyLink:store.zomatoLink;
+  if(link&&(link.startsWith('http')||link.startsWith('https'))){
+    window.open(link,'_blank');
+  } else {
+    const name=which==='swiggy'?'Swiggy':'Zomato';
+    toast(`📱 We're getting listed on ${name} soon! Order via WhatsApp for now.`,3800);
+    setTimeout(()=>openCart(),4200);
+  }
+}
+
+/* ─── NAV ─── */
+let mobOpen=false;
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+  // Subtle parallax on hero bg
+  const bg=document.getElementById('heroBg');
+  if(bg)bg.style.transform=`scale(1.05) translateY(${window.scrollY*0.15}px)`;
+});
+function toggleMob(){
+  mobOpen=!mobOpen;
+  document.getElementById('mobNav').classList.toggle('open',mobOpen);
+  document.getElementById('hbg').classList.toggle('open',mobOpen);
+}
+function closeMob(){
+  mobOpen=false;
+  document.getElementById('mobNav').classList.remove('open');
+  document.getElementById('hbg').classList.remove('open');
+}
+document.addEventListener('click',e=>{
+  if(mobOpen&&!e.target.closest('#nav')&&!e.target.closest('#mobNav'))closeMob();
+});
+
+/* ─── ADMIN ─── */
+function openAdmin(){document.getElementById('adminOv').classList.add('open');}
+function closeAdmin(){document.getElementById('adminOv').classList.remove('open');}
+function doLogin(){
+  const v=document.getElementById('aPass').value;
+  if(v===store.pass){
+    document.getElementById('aLogin').style.display='none';
+    document.getElementById('aMain').style.display='block';
+    loadSettings();renderAP();
+  } else showAMsg('Incorrect password','err');
+}
+function aTab(tab,btn){
+  document.querySelectorAll('.asec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('asec-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
+function showAMsg(msg,type='ok'){
+  const el=document.getElementById('amsg');
+  el.textContent=msg;el.className='amsg '+type;
+  clearTimeout(el._t);el._t=setTimeout(()=>{el.className='amsg';},3500);
+}
+function renderAP(){
+  const cat=document.getElementById('aCat').value;
+  const list=document.getElementById('aPList');
+  list.innerHTML='';
+  (store.products[cat]||[]).forEach(p=>{
+    const row=document.createElement('div');
+    row.className='pad-row';
+    row.innerHTML=`
+      <input class="pinput" id="pe-${p.id}" value="${p.emoji||''}" title="Emoji">
+      <input class="pinput" id="pn-${p.id}" value="${p.name}" placeholder="Name">
+      <input class="pinput" id="pd-${p.id}" value="${p.desc||''}" placeholder="Desc">
+      <input class="pinput" id="pp-${p.id}" value="${p.price}" type="number" placeholder="₹">
+      <button class="psave" onclick="saveProd('${cat}','${p.id}')">Save</button>
+      <button class="pdel" onclick="delProd('${cat}','${p.id}')">🗑</button>`;
+    list.appendChild(row);
+  });
+}
+function saveProd(cat,id){
+  const p=store.products[cat].find(x=>x.id===id);if(!p)return;
+  p.emoji=document.getElementById('pe-'+id).value.trim();
+  p.name =document.getElementById('pn-'+id).value.trim();
+  p.desc =document.getElementById('pd-'+id).value.trim();
+  p.price=parseInt(document.getElementById('pp-'+id).value)||p.price;
+  persist();renderProducts();showAMsg('✅ Saved!');
+}
+function delProd(cat,id){
+  if(!confirm('Delete this product?'))return;
+  store.products[cat]=store.products[cat].filter(p=>p.id!==id);
+  persist();renderAP();renderProducts();showAMsg('🗑️ Deleted!');
+}
+function addProd(){
+  const cat=document.getElementById('aCat').value;
+  const name=document.getElementById('np-nm').value.trim();
+  const price=parseInt(document.getElementById('np-pr').value)||0;
+  if(!name||!price){showAMsg('Name and price required','err');return;}
+  const id=cat[0]+Date.now();
+  store.products[cat].push({
+    id,name,price,
+    emoji:document.getElementById('np-em').value.trim()||catEm[cat],
+    desc:document.getElementById('np-dc').value.trim(),
+    badge:document.getElementById('np-bd').value.trim()
+  });
+  persist();
+  ['np-em','np-nm','np-pr','np-dc','np-bd'].forEach(k=>{const el=document.getElementById(k);if(el)el.value='';});
+  renderAP();renderProducts();showAMsg('✅ Product added!');
+}
+function loadSettings(){
+  document.getElementById('s-wa1').value=store.wa1||'';
+  document.getElementById('s-wa2').value=store.wa2||'';
+  document.getElementById('s-addr').value=store.address||'';
+  document.getElementById('s-hrs').value=store.hours||'';
+  document.getElementById('s-sw').value=store.swiggyLink||'';
+  document.getElementById('s-zo').value=store.zomatoLink||'';
+}
+function saveSettings(){
+  const np=document.getElementById('s-pw').value.trim();
+  store.wa1=document.getElementById('s-wa1').value.replace(/\D/g,'');
+  store.wa2=document.getElementById('s-wa2').value.replace(/\D/g,'');
+  store.address=document.getElementById('s-addr').value.trim();
+  store.hours=document.getElementById('s-hrs').value.trim();
+  store.swiggyLink=document.getElementById('s-sw').value.trim();
+  store.zomatoLink=document.getElementById('s-zo').value.trim();
+  if(np)store.pass=np;
+  persist();applySettings();showAMsg('✅ Settings saved!');
+}
+function applySettings(){
+  const ae=document.getElementById('cafe-address');
+  const he=document.getElementById('cafe-hours');
+  if(ae)ae.innerHTML=store.address.replace(/\n/g,'<br>');
+  if(he)he.textContent=store.hours;
+  // Update platform notes
+  const sn=document.getElementById('swiggy-note');
+  const zn=document.getElementById('zomato-note');
+  if(sn)sn.textContent=store.swiggyLink?'✅ Listed on Swiggy — click to order!':'⏳ Getting listed on Swiggy soon! Use WhatsApp for now.';
+  if(zn)zn.textContent=store.zomatoLink?'✅ Listed on Zomato — click to order!':'⏳ Getting listed on Zomato soon! Use WhatsApp for now.';
+}
+
+/* ─── SCROLL REVEAL ─── */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>ro.observe(el));
+
+/* ─── ESC KEY ─── */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeCart();closeWL();closeAdmin();closeMob();}
+});
+
+/* ─── INIT ─── */
+renderProducts();
+applySettings();
+refreshBadges();
+</script>
+</body>
+</html>

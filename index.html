@@ -382,7 +382,7 @@ h1,h2,h3{font-family:'Cormorant Garant',Georgia,serif;}
 ════════════════════════════════════════════ */
 .img-divider{
   height:420px;position:relative;overflow:hidden;
-  background:url('https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+  background:url('images/gallery_1.png') center/cover no-repeat;
 }
 .img-divider::before{
   content:'';position:absolute;inset:0;
@@ -495,7 +495,7 @@ h1,h2,h3{font-family:'Cormorant Garant',Georgia,serif;}
    CONTACT
 ════════════════════════════════════════════ */
 #contact{
-  background:url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1920&q=80&auto=format&fit=crop') center/cover fixed;
+  background:url('images/why_us.png') center/cover fixed;
   position:relative;
 }
 #contact::before{
@@ -595,12 +595,36 @@ footer .flinks a:hover{color:var(--gold2);}
 .ci-ctrl button:hover{border-color:var(--g1);color:var(--g1);}
 .ci-n{font-size:.85rem;font-weight:700;min-width:18px;text-align:center;}
 .drawer-ft{padding:16px 22px;border-top:1px solid var(--border);}
-.cart-tot{display:flex;justify-content:space-between;font-weight:700;font-size:1rem;color:var(--brown);margin-bottom:12px;}
-.finput{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;font-size:.85rem;font-family:inherit;outline:none;transition:.2s;margin-bottom:10px;}
-.finput:focus{border-color:var(--g2);}
-.wa-send{width:100%;background:#25d366;color:#fff;border:none;padding:15px;border-radius:12px;font-size:.95rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:.25s;}
-.wa-send:hover{background:#1da851;}
-.wa-foot-note{text-align:center;font-size:.72rem;color:var(--muted);margin-top:8px;}
+.cart-tot{display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;color:var(--brown);margin-bottom:14px;padding-bottom:12px;border-bottom:1px dashed var(--border);}
+/* Checkout form */
+.checkout-form{display:flex;flex-direction:column;gap:0;}
+.cf-section-title{font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g1);margin:12px 0 8px;display:flex;align-items:center;gap:6px;}
+.cf-row{display:flex;gap:8px;}
+.finput{
+  width:100%;border:1.5px solid var(--border);border-radius:10px;
+  padding:11px 14px;font-size:.84rem;font-family:inherit;outline:none;
+  transition:border-color .2s,box-shadow .2s;margin-bottom:8px;background:#fff;color:var(--text);
+}
+.finput:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(82,183,136,.15);}
+.finput.error{border-color:#e23744;background:#fff5f6;}
+.finput::placeholder{color:#aaa;}
+.order-type-wrap{display:flex;gap:8px;margin-bottom:8px;}
+.ot-btn{
+  flex:1;padding:10px 8px;border-radius:10px;border:2px solid var(--border);
+  background:#fff;font-size:.82rem;font-weight:600;color:var(--muted);
+  cursor:pointer;transition:.2s;text-align:center;
+}
+.ot-btn.active{border-color:var(--g1);background:var(--g4);color:var(--g1);}
+.wa-send{
+  width:100%;background:#25d366;color:#fff;border:none;
+  padding:15px;border-radius:12px;font-size:.95rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  cursor:pointer;transition:.25s;margin-top:4px;
+}
+.wa-send:hover{background:#1da851;transform:translateY(-1px);}
+.wa-send:active{transform:translateY(0);}
+.wa-foot-note{text-align:center;font-size:.71rem;color:var(--muted);margin-top:8px;line-height:1.5;}
+.required-star{color:#e23744;}
 
 /* Wishlist drawer */
 .wl-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center;}
@@ -742,7 +766,7 @@ footer .flinks a:hover{color:var(--gold2);}
     <div class="nav-actions">
       <button class="nav-icon-btn" onclick="openWL()" title="Wishlist">❤️<span class="nbadge" id="wlBadge"></span></button>
       <button class="nav-icon-btn" onclick="openCart()" title="Cart">🛒<span class="nbadge" id="cartBadge"></span></button>
-      <button class="nav-cta" onclick="scrollTo({top:document.getElementById('menu').offsetTop-80,behavior:'smooth'})">🍹 Order Now</button>
+      <button class="nav-cta" onclick="scrollToSection('menu')">🍹 Order Now</button>
       <button class="hamburger" id="hbg" onclick="toggleMob()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -752,7 +776,7 @@ footer .flinks a:hover{color:var(--gold2);}
 <div class="mob-nav" id="mobNav">
   <a href="#home" onclick="closeMob()">🏠 Home</a>
   <a href="#menu" onclick="closeMob()">🍹 Menu</a>
-  <a href="#order" onclick="closeMob()">📱 Order Online</a>
+  <a href="#order" onclick="closeMob();scrollToSection('order')">📱 Order Online</a>
   <a href="#about" onclick="closeMob()">🌿 About Us</a>
   <a href="#contact" onclick="closeMob()">📍 Contact</a>
   <a href="javascript:void(0)" onclick="openCart();closeMob()">🛒 Cart</a>
@@ -770,7 +794,7 @@ footer .flinks a:hover{color:var(--gold2);}
     <p class="hero-tagline">THE HEALTHY FOOD JOINT · UTHANDI, CHENNAI</p>
     <p>Handcrafted smoothies, cold-pressed juices and wholesome meals made fresh every day — zero preservatives, 100% pure goodness.</p>
     <div class="hero-btns">
-      <button class="btn-gold" onclick="scrollTo({top:document.getElementById('menu').offsetTop-80,behavior:'smooth'})">🍹 Explore Menu</button>
+      <button class="btn-gold" onclick="scrollToSection('menu')">🍹 Explore Menu</button>
       <button class="btn-ghost" onclick="openCart()">🛒 My Cart</button>
     </div>
   </div>
@@ -884,7 +908,7 @@ footer .flinks a:hover{color:var(--gold2);}
     <span class="script">Order in 3 easy steps</span>
     <h2>Pick → Cart → WhatsApp →&nbsp;Enjoy!</h2>
     <p>Browse the menu, add your favourites to the cart, and send your order to us via WhatsApp. We confirm within minutes and deliver fresh to your door.</p>
-    <button class="btn-gold" onclick="scrollTo({top:document.getElementById('order').offsetTop-80,behavior:'smooth'})">📱 See Ordering Options</button>
+    <button class="btn-gold" onclick="scrollToSection('order')">📱 See Ordering Options</button>
   </div>
 </div>
 
@@ -1080,10 +1104,43 @@ footer .flinks a:hover{color:var(--gold2);}
   <div class="drawer-bd" id="cartBd"></div>
   <div class="drawer-ft">
     <div class="cart-tot"><span>Order Total</span><span id="cartTot">₹0</span></div>
-    <input class="finput" id="custName" type="text" placeholder="Your name *" autocomplete="name">
-    <input class="finput" id="custNote" type="text" placeholder="Special instructions (optional)">
-    <button class="wa-send" onclick="sendOrder()">💬 Send Order via WhatsApp</button>
-    <p class="wa-foot-note">Your order details will be sent to +91 89259 62259</p>
+    <div class="checkout-form">
+
+      <!-- Order Type -->
+      <div class="cf-section-title">🛵 Order Type <span class="required-star">*</span></div>
+      <div class="order-type-wrap">
+        <button class="ot-btn active" id="ot-delivery" onclick="setOT('delivery')">🛵 Delivery</button>
+        <button class="ot-btn" id="ot-pickup" onclick="setOT('pickup')">🏃 Pickup</button>
+      </div>
+
+      <!-- Customer Info -->
+      <div class="cf-section-title">👤 Your Details</div>
+      <input class="finput" id="custName" type="text" placeholder="Full name *" autocomplete="name">
+      <input class="finput" id="custPhone" type="tel" placeholder="Phone number * (e.g. 9876543210)" autocomplete="tel">
+
+      <!-- Delivery Address – shown only for delivery -->
+      <div id="addr-wrap">
+        <div class="cf-section-title">📍 Delivery Address <span class="required-star">*</span></div>
+        <input class="finput" id="custStreet" type="text" placeholder="House / Flat no. & Street *" autocomplete="address-line1">
+        <div class="cf-row">
+          <input class="finput" id="custArea"   type="text" placeholder="Area / Landmark" autocomplete="address-line2">
+          <input class="finput" id="custPincode" type="text" placeholder="Pincode" style="max-width:110px;" autocomplete="postal-code">
+        </div>
+      </div>
+
+      <!-- Special note -->
+      <div class="cf-section-title">📝 Special Instructions</div>
+      <input class="finput" id="custNote" type="text" placeholder="Extra instructions (optional)">
+
+      <button class="wa-send" onclick="sendOrder()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.5 2.25C6.394 2.25 2.25 6.394 2.25 11.5c0 1.72.468 3.33 1.28 4.716L2.25 21.75l5.688-1.257A9.213 9.213 0 0011.5 20.75c5.106 0 9.25-4.144 9.25-9.25S16.606 2.25 11.5 2.25z" opacity=".3"/></svg>
+        Send Order via WhatsApp
+      </button>
+      <p class="wa-foot-note">
+        📲 Order sent to <strong>+91 89259 62259</strong><br>
+        We confirm within 2 minutes!
+      </p>
+    </div>
   </div>
 </div>
 
@@ -1350,26 +1407,106 @@ function openCart(){
   document.getElementById('cartOv').classList.add('open');
   document.getElementById('cartDr').classList.add('open');
   renderCart();
-  document.getElementById('custName').focus();
+  setTimeout(()=>{ const el=document.getElementById('custName'); if(el) el.focus(); },300);
 }
 function closeCart(){
   document.getElementById('cartOv').classList.remove('open');
   document.getElementById('cartDr').classList.remove('open');
 }
+/* ─── ORDER TYPE ─── */
+let orderType='delivery';
+function setOT(type){
+  orderType=type;
+  document.getElementById('ot-delivery').classList.toggle('active',type==='delivery');
+  document.getElementById('ot-pickup').classList.toggle('active',type==='pickup');
+  document.getElementById('addr-wrap').style.display=type==='delivery'?'block':'none';
+}
+
+/* ─── SEND ORDER ─── */
 function sendOrder(){
-  const name=document.getElementById('custName').value.trim();
-  const note=document.getElementById('custNote').value.trim();
-  if(!name){toast('⚠️ Please enter your name');document.getElementById('custName').focus();return;}
-  const items=Object.values(cart);
-  if(!items.length){toast('⚠️ Your cart is empty!');return;}
-  const total=items.reduce((s,i)=>s+i.price*i.qty,0);
-  let msg=`🌴 *New Order – Palm Cafe*\n\n`;
-  msg+=`👤 *Name:* ${name}\n\n🛒 *Order:*\n`;
-  items.forEach(i=>{msg+=`• ${i.emoji} ${i.name} × ${i.qty} = ₹${i.price*i.qty}\n`;});
-  msg+=`\n💰 *Total: ₹${total}*`;
-  if(note)msg+=`\n📝 *Note:* ${note}`;
-  msg+=`\n\n_Kindly confirm this order. Thank you! 🙏_`;
+  // Gather fields
+  const name   = document.getElementById('custName').value.trim();
+  const phone  = document.getElementById('custPhone').value.trim();
+  const street = document.getElementById('custStreet').value.trim();
+  const area   = document.getElementById('custArea').value.trim();
+  const pin    = document.getElementById('custPincode').value.trim();
+  const note   = document.getElementById('custNote').value.trim();
+  const items  = Object.values(cart);
+
+  // Clear previous errors
+  ['custName','custPhone','custStreet'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.remove('error');
+  });
+
+  // Validate
+  if(!items.length){ toast('⚠️ Your cart is empty! Add items first.'); return; }
+  let err=false;
+  if(!name){
+    document.getElementById('custName').classList.add('error');
+    document.getElementById('custName').focus();
+    toast('⚠️ Please enter your name'); err=true;
+  }
+  if(!err && !phone){
+    document.getElementById('custPhone').classList.add('error');
+    document.getElementById('custPhone').focus();
+    toast('⚠️ Please enter your phone number'); err=true;
+  }
+  if(!err && phone && !/^\d{10}$/.test(phone.replace(/\s/g,''))){
+    document.getElementById('custPhone').classList.add('error');
+    document.getElementById('custPhone').focus();
+    toast('⚠️ Enter a valid 10-digit phone number'); err=true;
+  }
+  if(!err && orderType==='delivery' && !street){
+    document.getElementById('custStreet').classList.add('error');
+    document.getElementById('custStreet').focus();
+    toast('⚠️ Please enter your delivery address'); err=true;
+  }
+  if(err) return;
+
+  // Build beautiful WhatsApp message
+  const total  = items.reduce((s,i)=>s+i.price*i.qty,0);
+  const now    = new Date();
+  const timeStr= now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
+  const dateStr= now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+
+  let msg = `🌴 *PALM CAFE – NEW ORDER* 🌴\n`;
+  msg    += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  // Order meta
+  msg    += `🕐 *Time:* ${dateStr} at ${timeStr}\n`;
+  msg    += `📦 *Type:* ${orderType==='delivery'?'🛵 Home Delivery':'🏃 Pickup from Store'}\n\n`;
+
+  // Customer details
+  msg    += `👤 *CUSTOMER DETAILS*\n`;
+  msg    += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg    += `• Name   : ${name}\n`;
+  msg    += `• Phone  : +91 ${phone}\n`;
+  if(orderType==='delivery'){
+    msg  += `• Address: ${street}`;
+    if(area)   msg += `, ${area}`;
+    if(pin)    msg += ` – ${pin}`;
+    msg  += `\n`;
+  }
+  msg    += `\n`;
+
+  // Order items
+  msg    += `🛒 *ORDER ITEMS*\n`;
+  msg    += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  items.forEach((item,i)=>{
+    msg  += `${i+1}. ${item.emoji} ${item.name}\n`;
+    msg  += `    Qty: ${item.qty}  ×  ₹${item.price}  =  *₹${item.price*item.qty}*\n`;
+  });
+  msg    += `\n`;
+  msg    += `💰 *TOTAL AMOUNT: ₹${total}*\n`;
+  if(note){
+    msg  += `\n📝 *Special Note:*\n${note}\n`;
+  }
+  msg    += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg    += `_Please confirm this order. Thank you! 🙏_`;
+
   window.open(`https://wa.me/${store.wa1||'918925962259'}?text=${encodeURIComponent(msg)}`,'_blank');
+  toast('✅ Order sent to WhatsApp!');
 }
 
 /* ─── WISHLIST ─── */
@@ -1575,6 +1712,15 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>ro.observe(
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeCart();closeWL();closeAdmin();closeMob();}
 });
+
+/* ─── SCROLL HELPER ─── */
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const navH = document.getElementById('nav').offsetHeight || 72;
+  const top  = el.getBoundingClientRect().top + window.pageYOffset - navH;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
 
 /* ─── INIT ─── */
 renderProducts();

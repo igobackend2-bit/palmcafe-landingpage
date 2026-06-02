@@ -1329,7 +1329,7 @@ footer a{color:var(--gold2);}
     <button class="dr-close" onclick="closeCart()" aria-label="Close cart">✕</button>
   </div>
   <div class="dr-body" id="cartBd"></div>
-  <div class="dr-foot">
+  <div class="dr-foot" id="cartFoot">
     <div class="cart-total-row"><span>Order Total</span><span id="cartTot">₹0</span></div>
 
     <div class="cf-label">🛵 Order Type <span class="req">*</span></div>
@@ -1595,12 +1595,15 @@ function cartDelta(id,d){
 }
 function renderCart(){
   const bd=document.getElementById('cartBd');
+  const foot=document.getElementById('cartFoot');
   const total=Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);
   document.getElementById('cartTot').textContent='₹'+total;
   if(!Object.keys(cart).length){
     bd.innerHTML=`<div class="empty-st"><div class="empty-ic">🛒</div><p>Your cart is empty.<br>Browse the menu and add items!</p></div>`;
+    if(foot) foot.style.display='none';
     return;
   }
+  if(foot) foot.style.display='block';
   bd.innerHTML=Object.entries(cart).map(([id,item])=>`
     <div class="cart-item">
       <div class="ci-em">${item.img ? `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : item.emoji}</div>
@@ -1774,12 +1777,11 @@ function showTab(tab,btn){
 
 /* ── PLATFORM BUTTONS ── */
 function handlePlatform(which){
-  const link=which==='swiggy'?store.swiggyLink:store.zomatoLink;
-  if(link&&link.startsWith('http')){window.open(link,'_blank');}
-  else{
-    toast('📱 Getting listed on '+(which==='swiggy'?'Swiggy':'Zomato')+' soon! Use WhatsApp for now.',3600);
-    setTimeout(()=>openCart(),4000);
+  let link=which==='swiggy'?store.swiggyLink:store.zomatoLink;
+  if(!link || !link.startsWith('http')){
+    link = which==='swiggy' ? 'https://www.swiggy.com' : 'https://www.zomato.com';
   }
+  window.open(link, '_blank');
 }
 
 /* ── SCROLL ── */

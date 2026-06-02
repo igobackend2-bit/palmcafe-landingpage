@@ -667,6 +667,35 @@ footer a{color:var(--gold2);}
 }
 .footer-links a{color:rgba(255,255,255,.45);transition:.15s;}
 .footer-links a:hover{color:var(--gold2);}
+/* Social icons row */
+.social-row{display:flex;justify-content:center;gap:12px;margin:14px 0;}
+.soc-btn{
+  width:40px;height:40px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.15rem;transition:.2s;text-decoration:none;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.08);color:#fff;
+}
+.soc-btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.3);}
+.soc-fb:hover{background:#1877f2;border-color:#1877f2;}
+.soc-ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:#dc2743;}
+.soc-wa:hover{background:#25d366;border-color:#25d366;}
+.soc-sw:hover{background:#fc8019;border-color:#fc8019;}
+.soc-zo:hover{background:#e23744;border-color:#e23744;}
+/* Contact social links */
+.clink.soc-link{cursor:pointer;}
+.clink-social-wrap{display:flex;gap:10px;margin-top:4px;}
+.clink-soc{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border-radius:10px;
+  font-size:.82rem;font-weight:700;color:#fff;
+  text-decoration:none;transition:.2s;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.08);
+}
+.clink-soc:hover{transform:translateY(-2px);}
+.clink-soc.fb:hover{background:#1877f2;border-color:#1877f2;}
+.clink-soc.ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:#dc2743;}
+.plat-note.listed{background:#d1fae5;color:#065f46;font-style:normal;font-weight:600;}
 
 /* ═══════════════════════════════════════
    LOGIN MODAL
@@ -1165,7 +1194,7 @@ footer a{color:var(--gold2);}
           <span class="plat-icon"><img src="https://cdn.simpleicons.org/swiggy/fc8019" width="36" height="36" alt="Swiggy"></span>
           <h3>Swiggy</h3>
           <p>Order via Swiggy for tracked doorstep delivery. Clicking opens our Swiggy restaurant page in a new tab.</p>
-          <div class="plat-note" id="swiggy-note">⏳ Getting listed on Swiggy soon! Use WhatsApp for now.</div>
+          <div class="plat-note listed" id="swiggy-note">✅ We're live on Swiggy! Click to order now.</div>
           <button class="plat-btn sw-b" id="swiggy-btn" onclick="handlePlatform('swiggy')">Order on Swiggy →</button>
         </div>
       </div>
@@ -1174,7 +1203,7 @@ footer a{color:var(--gold2);}
           <span class="plat-icon"><img src="https://cdn.simpleicons.org/zomato/e23744" width="40" height="40" alt="Zomato"></span>
           <h3>Zomato</h3>
           <p>Find us on Zomato, read reviews, and place your order. Clicking opens our Zomato restaurant page directly.</p>
-          <div class="plat-note" id="zomato-note">⏳ Getting listed on Zomato soon! Use WhatsApp for now.</div>
+          <div class="plat-note listed" id="zomato-note">✅ We're live on Zomato! Click to order now.</div>
           <button class="plat-btn zo-b" id="zomato-btn" onclick="handlePlatform('zomato')">Order on Zomato →</button>
         </div>
       </div>
@@ -1232,6 +1261,21 @@ footer a{color:var(--gold2);}
           <div class="clinks">
             <a class="clink" href="https://wa.me/918925962259" target="_blank" rel="noopener"><div class="clink-ic">💬</div><div><h4>WhatsApp (Primary)</h4><p>+91 89259 62259</p></div></a>
             <a class="clink" href="https://wa.me/918925893320" target="_blank" rel="noopener"><div class="clink-ic">💬</div><div><h4>WhatsApp (Secondary)</h4><p>+91 89258 93320</p></div></a>
+            <div class="clink" style="flex-direction:column;align-items:flex-start;gap:8px;">
+              <div style="display:flex;align-items:center;gap:13px;"><div class="clink-ic">📲</div><div><h4>Follow &amp; Order Online</h4><p>We're on Instagram, Facebook, Swiggy &amp; Zomato</p></div></div>
+              <div class="clink-social-wrap">
+                <a class="clink-soc ig" href="https://www.instagram.com/igo_palmcafe/?hl=en" target="_blank" rel="noopener">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  Instagram
+                </a>
+                <a class="clink-soc fb" href="https://www.facebook.com/cococruisee" target="_blank" rel="noopener">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  Facebook
+                </a>
+                <a class="clink-soc" style="background:rgba(252,128,25,.15);border-color:#fc8019;" href="https://www.swiggy.com/city/chennai/palm-cafe-kanathur-rest1273561?source=sharing" target="_blank" rel="noopener noreferrer">🛵 Swiggy</a>
+                <a class="clink-soc" style="background:rgba(226,55,68,.15);border-color:#e23744;" href="https://zomato.onelink.me/xqzv/itumbcfh" target="_blank" rel="noopener noreferrer">🍽️ Zomato</a>
+              </div>
+            </div>
             <div class="clink"><div class="clink-ic">📍</div><div><h4>Address</h4><p id="cafe-address">No 17, Kovalan Street, 2nd Main Road,<br>Uthandi Kanathur, Chennai – 600 119</p></div></div>
             <div class="clink"><div class="clink-ic">🕐</div><div><h4>Hours</h4><p id="cafe-hours">Mon – Sun: 8:00 AM – 10:00 PM</p></div></div>
           </div>
@@ -1261,15 +1305,35 @@ footer a{color:var(--gold2);}
 <!-- Footer -->
 <footer>
   <div class="footer-logo"><img src="images/logo.svg" alt="Palm Cafe"></div>
-  <p style="color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">The Healthy Food Joint</p>
+  <p style="color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">The Healthy Food Joint</p>
+
+  <!-- Social icons -->
+  <div class="social-row">
+    <a class="soc-btn soc-fb" href="https://www.facebook.com/cococruisee"
+       target="_blank" rel="noopener" title="Palm Cafe on Facebook" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a class="soc-btn soc-ig" href="https://www.instagram.com/igo_palmcafe/?hl=en"
+       target="_blank" rel="noopener" title="Palm Cafe on Instagram" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a class="soc-btn soc-wa" href="https://wa.me/918925962259"
+       target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <a class="soc-btn soc-sw" href="https://www.swiggy.com/city/chennai/palm-cafe-kanathur-rest1273561?source=sharing"
+       target="_blank" rel="noopener noreferrer" title="Order Palm Cafe on Swiggy" aria-label="Swiggy">🛵</a>
+    <a class="soc-btn soc-zo" href="https://zomato.onelink.me/xqzv/itumbcfh"
+       target="_blank" rel="noopener noreferrer" title="Order Palm Cafe on Zomato" aria-label="Zomato">🍽️</a>
+  </div>
+
   <div class="footer-links">
     <a href="#menu">Menu</a><a href="#order">Order</a>
     <a href="#about">About</a><a href="#contact">Contact</a>
-    <a href="https://wa.me/918925962259" target="_blank" rel="noopener">WhatsApp</a>
   </div>
   <p>📍 No 17, Kovalan Street, 2nd Main Road, Uthandi Kanathur, Chennai – 600 119</p>
   <p>📞 <a href="tel:+918925962259">+91 89259 62259</a> &nbsp;|&nbsp; <a href="tel:+918925893320">+91 89258 93320</a></p>
-  <p style="margin-top:10px;font-size:.72rem;">© 2024 Palm Cafe. All rights reserved. Made with ❤️ for health lovers.</p>
+  <p style="margin-top:12px;font-size:.72rem;">© 2024 Palm Cafe. All rights reserved. Made with ❤️ for health lovers.</p>
 </footer>
 
 <!-- ═══════════════════════════════════════
@@ -1463,7 +1527,10 @@ const DEF={
   pass:'palmcafe2024',wa1:'918925962259',wa2:'918925893320',
   address:'No 17, Kovalan Street, 2nd Main Road,\nUthandi Kanathur, Chennai – 600 119',
   hours:'Mon – Sun: 8:00 AM – 10:00 PM',
-  swiggyLink:'',zomatoLink:'',
+  swiggyLink:'https://www.swiggy.com/city/chennai/palm-cafe-kanathur-rest1273561',
+  zomatoLink:'https://zomato.onelink.me/xqzv/itumbcfh?utm_source=ig&utm_medium=social&utm_content=link_in_bio',
+  facebookLink:'https://www.facebook.com/cococruisee',
+  instagramLink:'https://www.instagram.com/igo_palmcafe/?hl=en',
   products:{
     smoothies:[
       {id:'s1',name:'Dragon Energy Blend',price:110,desc:'Energising dragon fruit blend packed with antioxidants and natural vitality.',emoji:'🔴',badge:'Popular',img:'images/palm cafe image/Dragon Eneregy Blend.png'},
@@ -1776,12 +1843,14 @@ function showTab(tab,btn){
 }
 
 /* ── PLATFORM BUTTONS ── */
+/* ── PLATFORM LINKS — always hardcoded, never from localStorage ── */
+const PLATFORM_URLS={
+  swiggy:'https://www.swiggy.com/city/chennai/palm-cafe-kanathur-rest1273561',
+  zomato:'https://zomato.onelink.me/xqzv/itumbcfh'
+};
 function handlePlatform(which){
-  let link=which==='swiggy'?store.swiggyLink:store.zomatoLink;
-  if(!link || !link.startsWith('http')){
-    link = which==='swiggy' ? 'https://www.swiggy.com' : 'https://www.zomato.com';
-  }
-  window.open(link, '_blank');
+  /* Always open the exact restaurant page regardless of any stored value */
+  window.open(PLATFORM_URLS[which],'_blank','noopener,noreferrer');
 }
 
 /* ── SCROLL ── */
@@ -1909,8 +1978,8 @@ function applySettings(){
   if(he)he.textContent=store.hours;
   const sn=document.getElementById('swiggy-note');
   const zn=document.getElementById('zomato-note');
-  if(sn)sn.textContent=store.swiggyLink?'✅ Listed on Swiggy — click to order!':'⏳ Getting listed on Swiggy soon! Use WhatsApp for now.';
-  if(zn)zn.textContent=store.zomatoLink?'✅ Listed on Zomato — click to order!':'⏳ Getting listed on Zomato soon! Use WhatsApp for now.';
+  if(sn){ sn.textContent='✅ We\'re live on Swiggy! Click to order now.'; sn.className='plat-note listed'; }
+  if(zn){ zn.textContent='✅ We\'re live on Zomato! Click to order now.'; zn.className='plat-note listed'; }
   const wn=document.querySelector('.wa-note');
   if(wn)wn.innerHTML=`📲 Sent to <strong>+${store.wa1||'918925962259'}</strong> · We confirm in under 2 min!`;
 }
@@ -2003,6 +2072,11 @@ function loadProfileToCart(){
 }
 
 /* ── INIT ── */
+/* Always force the correct restaurant URLs — overwrite any stale localStorage value */
+store.swiggyLink = PLATFORM_URLS.swiggy;
+store.zomatoLink = PLATFORM_URLS.zomato;
+persist();
+
 renderProducts();
 applySettings();
 refreshBadges();

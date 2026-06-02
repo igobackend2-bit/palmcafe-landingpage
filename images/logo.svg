@@ -2,7 +2,7 @@
   <defs>
     <style>
       .pc-text {
-        font-family: 'Arial Rounded MT Bold', 'Nunito', 'Varela Round', Arial, sans-serif;
+        font-family: 'Playfair Display', Georgia, serif;
         font-weight: 900;
         font-size: 90px;
         fill: #1a5216;

@@ -161,6 +161,14 @@ ul{list-style:none;}
 }
 .nav-cta-btn:hover{background:#b5832e;transform:translateY(-1px);}
 
+/* Animations */
+@keyframes cartBounce{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2) translateY(-2px);}
+  100%{transform:scale(1) translateY(0);}
+}
+.cart-pop{animation:cartBounce 0.4s var(--ease);}
+
 /* Hamburger */
 .hbg{
   display:none;flex-direction:column;gap:5px;
@@ -535,15 +543,43 @@ ul{list-style:none;}
 .plat-btn.zo-b{background:#e23744;}
 
 /* ═══════════════════════════════════════
-   TESTIMONIALS
+   TESTIMONIALS & LIGHTBOX
 ═══════════════════════════════════════ */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi-slider{
+  display:flex;gap:20px;overflow-x:auto;padding-bottom:16px;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+.testi-slider::-webkit-scrollbar{height:6px;}
+.testi-slider::-webkit-scrollbar-track{background:#f0f0f0;border-radius:4px;}
+.testi-slider::-webkit-scrollbar-thumb{background:var(--g3);border-radius:4px;}
+
 .tcard{
+  min-width:320px;flex:1;scroll-snap-align:start;
   background:var(--white);border-radius:var(--rl);
   padding:26px;border:1px solid var(--border);
   box-shadow:var(--sh0);transition:.25s;
   display:flex;flex-direction:column;
 }
+
+/* Lightbox */
+.lightbox-ov{
+  position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox-ov.open{opacity:1;pointer-events:all;}
+.lightbox-ov img{
+  max-width:90%;max-height:90vh;border-radius:12px;
+  box-shadow:0 10px 40px rgba(0,0,0,.5);
+  transform:scale(.9);transition:transform .3s var(--ease);
+}
+.lightbox-ov.open img{transform:scale(1);}
+.lightbox-close{
+  position:absolute;top:20px;right:24px;color:#fff;
+  font-size:2.5rem;cursor:pointer;opacity:.7;transition:.2s;line-height:1;
+}
+.lightbox-close:hover{opacity:1;transform:scale(1.1);}
 .tcard:hover{box-shadow:var(--sh1);transform:translateY(-4px);}
 .tcard-stars{color:var(--gold);font-size:.95rem;letter-spacing:1px;margin-bottom:12px;}
 .tcard-text{
@@ -651,22 +687,37 @@ ul{list-style:none;}
 ═══════════════════════════════════════ */
 footer{
   background:#0d0d0d;color:rgba(255,255,255,.45);
-  padding:40px 24px;text-align:center;
-  font-size:.79rem;line-height:2;
+  padding:60px 24px 24px; font-size:.85rem;line-height:1.6;
 }
-.footer-logo{margin-bottom:6px;}
-.footer-logo img{
-  height:36px;width:auto;margin:0 auto;
-  filter:brightness(0) invert(1);opacity:.7;
+.footer-top{
+  max-width:1200px;margin:0 auto;display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:40px;
 }
-footer strong{color:rgba(255,255,255,.8);}
-footer a{color:var(--gold2);}
-.footer-links{
-  display:flex;justify-content:center;gap:18px;flex-wrap:wrap;
-  margin:10px 0;
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr; text-align:center !important;}}
+@media(max-width:600px){.footer-col{text-align:center !important;} .social-row{justify-content:center !important;}}
+.footer-logo{margin-bottom:12px;}
+.footer-logo img{height:40px;width:auto;filter:brightness(0) invert(1);opacity:.8;}
+.footer-col h4{color:#fff;font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;margin-bottom:16px;}
+.footer-col ul{list-style:none;padding:0;margin:0;}
+.footer-col ul li{margin-bottom:8px;}
+.footer-col ul a{color:rgba(255,255,255,.6);transition:.2s;}
+.footer-col ul a:hover{color:var(--gold2);}
+.footer-bot{
+  text-align:center;border-top:1px solid rgba(255,255,255,.1);
+  padding-top:24px;font-size:.75rem;
 }
-.footer-links a{color:rgba(255,255,255,.45);transition:.15s;}
-.footer-links a:hover{color:var(--gold2);}
+.nl-form{display:flex;margin-top:10px;}
+.nl-input{
+  flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);
+  padding:10px 14px;border-radius:8px 0 0 8px;color:#fff;outline:none;font-family:inherit;font-size:0.85rem;
+}
+.nl-input:focus{border-color:var(--gold2);}
+.nl-btn{
+  background:var(--gold);color:#fff;border:none;padding:10px 16px;
+  border-radius:0 8px 8px 0;font-weight:700;cursor:pointer;transition:0.2s;
+}
+.nl-btn:hover{background:#b5832e;}
 /* Social icons row */
 .social-row{display:flex;justify-content:center;gap:12px;margin:14px 0;}
 .soc-btn{
@@ -867,6 +918,22 @@ footer a{color:var(--gold2);}
 }
 .wl-rm-btn:hover{background:#fee2e2;color:var(--r1);}
 
+/* Profile Additions */
+.prof-card{
+  background:var(--white); border-radius:var(--r); padding:16px;
+  border:1px solid var(--border); margin-bottom:16px; box-shadow:var(--sh0);
+}
+.order-hist-item{
+  background:var(--g5); border-radius:10px; padding:14px; margin-top:10px;
+  border:1px solid #daf0de; font-size:0.85rem;
+}
+.order-hist-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-weight:600; }
+.order-badge{ padding:5px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+.order-badge.pending{ background:#fff3cd; color:#856404; }
+.order-badge.accepted{ background:#d4edda; color:#155724; }
+.order-items{ color:var(--muted); font-size:0.8rem; line-height:1.5; margin-bottom:12px; }
+.order-total{ font-weight:800; color:var(--g1); font-size:1rem; border-top:1px dashed #c3e6c9; padding-top:10px; text-align:right; }
+
 /* ═══════════════════════════════════════
    ADMIN
 ═══════════════════════════════════════ */
@@ -972,7 +1039,6 @@ footer a{color:var(--gold2);}
   .about-grid{grid-template-columns:1fr;gap:36px;}
   .about-img-wrap{aspect-ratio:16/9;max-height:340px;}
   .platforms-grid{grid-template-columns:1fr;}
-  .testi-grid{grid-template-columns:1fr 1fr;}
   .contact-grid{grid-template-columns:1fr;gap:36px;}
   .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
   .gi:first-child,.gi:nth-child(4){grid-column:span 2;}
@@ -989,7 +1055,6 @@ footer a{color:var(--gold2);}
   .stat-item{min-width:calc(50% - 1px);border-bottom:1px solid rgba(255,255,255,.06);}
   .stat-item:nth-child(even){border-right:none;}
   .addons-strip{gap:20px;padding:16px;}
-  .testi-grid{grid-template-columns:1fr;}
   .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto;}
   .gi:first-child,.gi:nth-child(4){grid-column:span 1;}
   .gi{aspect-ratio:4/3;}
@@ -1006,9 +1071,42 @@ footer a{color:var(--gold2);}
   .tab-btn span.tab-label{display:none;}/* hide text, keep emoji on tiny phones */
   .tab-btn{padding:10px 14px;}
 }
+
+/* ═══════════════════════════════════════
+   PRELOADER
+═══════════════════════════════════════ */
+#preloader{
+  position:fixed;inset:0;background:var(--white);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 0.6s var(--ease), visibility 0.6s;
+}
+#preloader.loaded{opacity:0;visibility:hidden;}
+.pl-spinner{
+  width:50px;height:50px;border:4px solid var(--g4);
+  border-top-color:var(--g1);border-radius:50%;
+  animation:pl-spin 1s linear infinite;
+  margin-bottom:16px;
+}
+.pl-text{
+  font-family:'Playfair Display',Georgia,serif;
+  color:var(--g1);font-size:1.1rem;font-weight:700;letter-spacing:1px;
+}
+@keyframes pl-spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pl-spinner"></div>
+  <div class="pl-text">Palm Cafe</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-ov" id="lightboxOv" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox(event)">✕</span>
+  <img id="lightboxImg" src="" alt="Gallery Image">
+</div>
 
 <div id="toast"></div>
 
@@ -1037,7 +1135,7 @@ footer a{color:var(--gold2);}
       <button class="nav-icon" onclick="openWL()" title="Wishlist" aria-label="Wishlist">
         ❤️<span class="nbadge" id="wlBadge"></span>
       </button>
-      <button class="nav-icon" onclick="openCart()" title="Cart" aria-label="Cart">
+      <button class="nav-icon" id="navCartBtn" onclick="openCart()" title="Cart" aria-label="Cart">
         🛒<span class="nbadge" id="cartBadge"></span>
       </button>
       <button class="nav-cta-btn" onclick="scrollToSection('menu')" aria-label="Order Now">
@@ -1222,10 +1320,12 @@ footer a{color:var(--gold2);}
       <div class="eyebrow">💬 Reviews</div>
       <h2 class="heading heading-xl">What Our Customers Say</h2>
     </div>
-    <div class="testi-grid">
+    <div class="testi-slider">
       <div class="tcard rv"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The ABC Immunity Boost is my everyday go-to. Absolutely fresh, no artificial taste, and I feel the energy all day. Best smoothie in Chennai!"</p><div class="tcard-author"><div class="tcard-av">P</div><div><div class="tcard-av-name">Priya S.</div><div class="tcard-av-loc">Uthandi, Chennai</div></div></div></div>
       <div class="tcard rv"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Ordered via WhatsApp and got a reply in under 2 minutes. The Avocado Breezy Delight was creamy perfection. Fresh, healthy, and delivered with a smile!"</p><div class="tcard-author"><div class="tcard-av">R</div><div><div class="tcard-av-name">Rajan K.</div><div class="tcard-av-loc">ECR, Chennai</div></div></div></div>
       <div class="tcard rv"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"Palm Cafe is a gem! The Cocoberry Dream is out of this world. You can literally taste how fresh the ingredients are. My family orders every weekend!"</p><div class="tcard-author"><div class="tcard-av">A</div><div><div class="tcard-av-name">Anitha M.</div><div class="tcard-av-loc">Kanathur, Chennai</div></div></div></div>
+      <div class="tcard rv"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"The delivery packaging is amazing, no spills and everything is chilled. I tried the Date & Nut shake—a perfect healthy dessert!"</p><div class="tcard-author"><div class="tcard-av">S</div><div><div class="tcard-av-name">Siddharth V.</div><div class="tcard-av-loc">OMR, Chennai</div></div></div></div>
+      <div class="tcard rv"><div class="tcard-stars">★★★★★</div><p class="tcard-text">"I love their zero preservative promise. My kids enjoy the Strawberry Milkshake and I don't have to worry about refined sugar. Highly recommended!"</p><div class="tcard-author"><div class="tcard-av">M</div><div><div class="tcard-av-name">Meera J.</div><div class="tcard-av-loc">Akkarai, Chennai</div></div></div></div>
     </div>
   </div>
 </section>
@@ -1240,11 +1340,11 @@ footer a{color:var(--gold2);}
       <h2 class="heading heading-xl">Fresh From Our Kitchen</h2>
     </div>
     <div class="gallery-grid">
-      <div class="gi"><img src="images/gallery_1.png" alt="Smoothie bowls" loading="lazy"><div class="gi-overlay"><span>🍹</span></div></div>
-      <div class="gi"><img src="images/gallery_2.png" alt="Fresh juice"    loading="lazy"><div class="gi-overlay"><span>🍊</span></div></div>
-      <div class="gi"><img src="images/gallery_3.png" alt="Healthy bowl"   loading="lazy"><div class="gi-overlay"><span>🥗</span></div></div>
-      <div class="gi"><img src="images/gallery_4.png" alt="Healthy food"   loading="lazy"><div class="gi-overlay"><span>🥑</span></div></div>
-      <div class="gi"><img src="images/gallery_5.png" alt="Berry smoothie" loading="lazy"><div class="gi-overlay"><span>🫐</span></div></div>
+      <div class="gi" onclick="openLightbox('images/gallery_1.png')"><img src="images/gallery_1.png" alt="Smoothie bowls" loading="lazy"><div class="gi-overlay"><span>🔍</span></div></div>
+      <div class="gi" onclick="openLightbox('images/gallery_2.png')"><img src="images/gallery_2.png" alt="Fresh juice"    loading="lazy"><div class="gi-overlay"><span>🔍</span></div></div>
+      <div class="gi" onclick="openLightbox('images/gallery_3.png')"><img src="images/gallery_3.png" alt="Healthy bowl"   loading="lazy"><div class="gi-overlay"><span>🔍</span></div></div>
+      <div class="gi" onclick="openLightbox('images/gallery_4.png')"><img src="images/gallery_4.png" alt="Healthy food"   loading="lazy"><div class="gi-overlay"><span>🔍</span></div></div>
+      <div class="gi" onclick="openLightbox('images/gallery_5.png')"><img src="images/gallery_5.png" alt="Berry smoothie" loading="lazy"><div class="gi-overlay"><span>🔍</span></div></div>
     </div>
   </div>
 </section>
@@ -1306,36 +1406,54 @@ footer a{color:var(--gold2);}
 
 <!-- Footer -->
 <footer>
-  <div class="footer-logo"><img src="images/logo.svg" alt="Palm Cafe"></div>
-  <p style="color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">The Healthy Food Joint</p>
+  <div class="footer-top">
+    <!-- Brand Col -->
+    <div class="footer-col" style="text-align:left;">
+      <div class="footer-logo"><img src="images/logo.svg" alt="Palm Cafe"></div>
+      <p style="color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">The Healthy Food Joint</p>
+      <p style="color:rgba(255,255,255,.6); font-size:0.85rem; max-width:280px; margin-bottom:16px;">Handcrafted smoothies, cold-pressed juices and wholesome meals — made fresh every day with zero preservatives.</p>
+      <div class="social-row" style="justify-content:flex-start;">
+        <a class="soc-btn soc-fb" href="https://www.facebook.com/cococruisee" target="_blank" rel="noopener" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a class="soc-btn soc-ig" href="https://www.instagram.com/igo_palmcafe/?hl=en" target="_blank" rel="noopener" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a class="soc-btn soc-wa" href="https://wa.me/918925962259" target="_blank" rel="noopener" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a class="soc-btn soc-sw" href="https://www.swiggy.com/city/chennai/palm-cafe-kanathur-rest1273561?source=sharing" target="_blank" rel="noopener noreferrer" title="Order Palm Cafe on Swiggy">🛵</a>
+        <a class="soc-btn soc-zo" href="https://zomato.onelink.me/xqzv/itumbcfh" target="_blank" rel="noopener noreferrer" title="Order Palm Cafe on Zomato">🍽️</a>
+      </div>
+    </div>
 
-  <!-- Social icons -->
-  <div class="social-row">
-    <a class="soc-btn soc-fb" href="https://www.facebook.com/cococruisee"
-       target="_blank" rel="noopener" title="Palm Cafe on Facebook" aria-label="Facebook">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-    </a>
-    <a class="soc-btn soc-ig" href="https://www.instagram.com/igo_palmcafe/?hl=en"
-       target="_blank" rel="noopener" title="Palm Cafe on Instagram" aria-label="Instagram">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-    </a>
-    <a class="soc-btn soc-wa" href="https://wa.me/918925962259"
-       target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </a>
-    <a class="soc-btn soc-sw" href="https://www.swiggy.com/city/chennai/palm-cafe-kanathur-rest1273561?source=sharing"
-       target="_blank" rel="noopener noreferrer" title="Order Palm Cafe on Swiggy" aria-label="Swiggy">🛵</a>
-    <a class="soc-btn soc-zo" href="https://zomato.onelink.me/xqzv/itumbcfh"
-       target="_blank" rel="noopener noreferrer" title="Order Palm Cafe on Zomato" aria-label="Zomato">🍽️</a>
+    <!-- Quick Links -->
+    <div class="footer-col" style="text-align:left;">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#order">Order Online</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact & Hours -->
+    <div class="footer-col" style="text-align:left;">
+      <h4>Visit Us</h4>
+      <p style="margin-bottom:8px;">📍 No 17, Kovalan Street, 2nd Main Road, Uthandi Kanathur, Chennai – 600119</p>
+      <p style="margin-bottom:8px;">📞 <a href="tel:+918925962259" style="color:var(--gold2);">+91 89259 62259</a></p>
+      <p>🕒 Mon - Sun: 11:00 AM - 11:00 PM</p>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="footer-col" style="text-align:left;">
+      <h4>Newsletter</h4>
+      <p style="font-size:0.8rem; margin-bottom:10px;">Subscribe for fresh updates and offers.</p>
+      <div class="nl-form">
+        <input type="email" class="nl-input" placeholder="Email address" aria-label="Email address">
+        <button class="nl-btn" onclick="toast('Thanks for subscribing!')">Join</button>
+      </div>
+    </div>
   </div>
 
-  <div class="footer-links">
-    <a href="#menu">Menu</a><a href="#order">Order</a>
-    <a href="#about">About</a><a href="#contact">Contact</a>
+  <div class="footer-bot">
+    <p>© 2024 Palm Cafe. All rights reserved. Made with ❤️ for health lovers.</p>
   </div>
-  <p>📍 No 17, Kovalan Street, 2nd Main Road, Uthandi Kanathur, Chennai – 600 119</p>
-  <p>📞 <a href="tel:+918925962259">+91 89259 62259</a> &nbsp;|&nbsp; <a href="tel:+918925893320">+91 89258 93320</a></p>
-  <p style="margin-top:12px;font-size:.72rem;">© 2024 Palm Cafe. All rights reserved. Made with ❤️ for health lovers.</p>
 </footer>
 
 <!-- ═══════════════════════════════════════
@@ -1352,6 +1470,9 @@ footer a{color:var(--gold2);}
     <div class="cf-label">Full Name</div>
     <input class="fi" id="loginName" type="text" placeholder="e.g. John Doe" style="margin-bottom:16px;" autocomplete="name">
     
+    <div class="cf-label">Email Address</div>
+    <input class="fi" id="loginEmail" type="email" placeholder="e.g. john@example.com" style="margin-bottom:16px;" autocomplete="email">
+
     <div class="cf-label">Phone Number</div>
     <input class="fi" id="loginPhone" type="tel" placeholder="10-digit mobile number" style="margin-bottom:32px;" autocomplete="tel">
     
@@ -1370,18 +1491,33 @@ footer a{color:var(--gold2);}
     <h2 style="font-size:1.6rem; color:var(--g1); margin:0;" id="profHeadName">My Profile</h2>
     <p style="color:var(--muted); font-size:0.9rem; margin-top:4px;" id="profHeadPhone"></p>
   </div>
-  <div class="dr-body" style="flex:1; padding-top:20px;">
-    <div class="cf-label">👤 Your Details</div>
-    <input class="fi" id="profName"  type="text" placeholder="Full name" autocomplete="name">
-    <input class="fi" id="profPhone" type="tel"  placeholder="Phone number (10 digits)" autocomplete="tel">
+  <div class="dr-body" style="flex:1; padding-top:20px; background:#fafafa;">
+    <div class="prof-card">
+      <div class="cf-label" style="margin-top:0;">👤 Your Details</div>
+      <input class="fi" id="profName"  type="text" placeholder="Full name" autocomplete="name">
+      <input class="fi" id="profEmail" type="email" placeholder="Email Address" autocomplete="email">
+      <input class="fi" id="profPhone" type="tel"  placeholder="Phone number (10 digits)" autocomplete="tel">
+    </div>
 
-    <div class="cf-label" style="margin-top:20px;">🏠 Default Address</div>
-    <input class="fi" id="profStreet" type="text" placeholder="Street / House No.">
-    <input class="fi" id="profArea"   type="text" placeholder="Area / Landmark">
-    <input class="fi" id="profPin"    type="text" placeholder="Pincode" maxlength="6">
+    <div class="prof-card">
+      <div class="cf-label" style="margin-top:0;">🏠 Default Address</div>
+      <input class="fi" id="profStreet" type="text" placeholder="Street / House No.">
+      <input class="fi" id="profArea"   type="text" placeholder="Area / Landmark">
+      <input class="fi" id="profPin"    type="text" placeholder="Pincode" maxlength="6">
+    </div>
 
-    <button class="btn-primary" style="margin-top:24px;" onclick="saveProfile()">Save Profile</button>
-    <button onclick="logoutProfile()" style="margin-top:12px; width:100%; padding:14px; border:1px solid #ff4d4d; border-radius:12px; background:transparent; color:#ff4d4d; font-weight:600; cursor:pointer;">Log Out</button>
+    <div class="prof-card" id="profOrdersWrap" style="display:none;">
+      <div class="cf-label" style="margin-top:0; display:flex; justify-content:space-between; align-items:center;">
+        <span>📦 Order History</span>
+        <span id="profOrderCount" style="color:var(--muted); font-weight:normal; text-transform:none; font-size:0.7rem;"></span>
+      </div>
+      <div id="profRecentOrder">
+        <!-- JS inserts order details here -->
+      </div>
+    </div>
+
+    <button class="btn-primary" style="margin-top:8px;" onclick="saveProfile()">Save Profile</button>
+    <button onclick="logoutProfile()" style="margin-top:12px; margin-bottom:20px; width:100%; padding:14px; border:1px solid #ff4d4d; border-radius:12px; background:transparent; color:#ff4d4d; font-weight:600; cursor:pointer;">Log Out</button>
   </div>
 </div>
 
@@ -1678,6 +1814,13 @@ function addToCart(id,cat){
   else cart[id]={name:p.name,price:p.price,emoji:p.emoji||catEm[cat],qty:1,img:p.img};
   toast('✅ '+p.name+' added to cart');
   renderProducts();renderCart();refreshBadges();
+  
+  const cBtn = document.getElementById('navCartBtn');
+  if(cBtn){
+    cBtn.classList.remove('cart-pop');
+    void cBtn.offsetWidth;
+    cBtn.classList.add('cart-pop');
+  }
 }
 function chQty(id,d){
   if(!cart[id])return;
@@ -1780,6 +1923,17 @@ function sendOrder(){
   const now=new Date();
   const ts=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
   const ds=now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+
+  // Save to Order History
+  if(!store.cxProfile) store.cxProfile = { name, phone };
+  if(!store.cxProfile.orders) store.cxProfile.orders = [];
+  store.cxProfile.orders.unshift({
+    date: ds, time: ts,
+    items: items.map(i => i.qty + 'x ' + i.name).join(', '),
+    total: total,
+    status: 'Pending' // Faked status since there's no backend
+  });
+  persist();
 
   let msg=`🌴 *PALM CAFE – NEW ORDER* 🌴\n`;
   msg   +=`━━━━━━━━━━━━━━━━━━━━━━\n\n`;
@@ -2041,9 +2195,10 @@ function closeLogin(){
 }
 function processLogin(){
   const n = document.getElementById('loginName').value.trim();
+  const e = document.getElementById('loginEmail').value.trim();
   const p = document.getElementById('loginPhone').value.trim();
   if(!n || !p){ toast('⚠️ Please enter your name and phone number'); return; }
-  store.cxProfile = { ...store.cxProfile, name: n, phone: p };
+  store.cxProfile = { ...store.cxProfile, name: n, email: e, phone: p };
   persist();
   toast('✅ Logged in successfully!');
   closeLogin();
@@ -2062,11 +2217,42 @@ function openProfile(){
   const cx = store.cxProfile || {};
   document.getElementById('profHeadName').textContent = cx.name || 'My Profile';
   document.getElementById('profHeadPhone').textContent = cx.phone ? '+91 '+cx.phone : '';
+  
   if(cx.name) document.getElementById('profName').value = cx.name;
+  document.getElementById('profEmail').value = cx.email || '';
   if(cx.phone) document.getElementById('profPhone').value = cx.phone;
+  
   if(cx.street) document.getElementById('profStreet').value = cx.street;
   if(cx.area) document.getElementById('profArea').value = cx.area;
   if(cx.pin) document.getElementById('profPin').value = cx.pin;
+
+  // Render Order History
+  const wrap = document.getElementById('profOrdersWrap');
+  const countSpan = document.getElementById('profOrderCount');
+  const recentDiv = document.getElementById('profRecentOrder');
+  
+  if(cx.orders && cx.orders.length > 0){
+    wrap.style.display = 'block';
+    countSpan.textContent = cx.orders.length + (cx.orders.length === 1 ? ' Order' : ' Orders');
+    const last = cx.orders[0]; // Most recent order
+    
+    // Determine badge class
+    let bClass = 'pending';
+    if(last.status.toLowerCase().includes('accepted')) bClass = 'accepted';
+    
+    recentDiv.innerHTML = `
+      <div class="order-hist-item">
+        <div class="order-hist-head">
+          <span>${last.date} at ${last.time}</span>
+          <span class="order-badge ${bClass}">${last.status}</span>
+        </div>
+        <div class="order-items">${last.items}</div>
+        <div class="order-total">Total: ₹${last.total}</div>
+      </div>
+    `;
+  } else {
+    wrap.style.display = 'none';
+  }
 }
 function closeProfile(){
   document.getElementById('profileOv').classList.remove('open');
@@ -2074,7 +2260,9 @@ function closeProfile(){
 }
 function saveProfile(){
   store.cxProfile = {
+    ...store.cxProfile, // Preserve existing properties like orders
     name: document.getElementById('profName').value.trim(),
+    email: document.getElementById('profEmail').value.trim(),
     phone: document.getElementById('profPhone').value.trim(),
     street: document.getElementById('profStreet').value.trim(),
     area: document.getElementById('profArea').value.trim(),
@@ -2111,6 +2299,29 @@ persist();
 renderProducts();
 applySettings();
 refreshBadges();
+
+/* ── LIGHTBOX ── */
+function openLightbox(src){
+  const ov = document.getElementById('lightboxOv');
+  const img = document.getElementById('lightboxImg');
+  img.src = src;
+  ov.classList.add('open');
+}
+function closeLightbox(e){
+  if(e && e.target.id === 'lightboxImg') return; // Don't close if clicking image
+  document.getElementById('lightboxOv').classList.remove('open');
+}
+
+/* Hide preloader on load */
+window.addEventListener('load', () => {
+  const pl = document.getElementById('preloader');
+  if(pl) pl.classList.add('loaded');
+});
+/* Fallback if window.load is too slow */
+setTimeout(() => {
+  const pl = document.getElementById('preloader');
+  if(pl) pl.classList.add('loaded');
+}, 3000);
 </script>
 </body>
 </html>
